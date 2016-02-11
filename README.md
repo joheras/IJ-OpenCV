@@ -5,6 +5,8 @@ IJ-OpenCV is a Java library that allows the communication of ImageJ/Fiji - a sof
 
 There are several benefits provided by the communication of ImageJ/Fiji and OpenCV. From the ImageJ/Fiji perspective, this tool is enhanced with several computer vision and machine learning algorithms, avoiding the re-implementation of methods and the connection with several external libraries. From the OpenCV point of view, this library is improved with a simple-to-use GUI and with the functionality to manage regions of interest.
 
+IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
+
 Download
 ---------------
 
