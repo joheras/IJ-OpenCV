@@ -23,10 +23,11 @@ public class ImageStackConverter implements IConverter<ImagePlus, opencv_core.Ma
         ImagePlus imp1;
         ImageConverter ic = new ImageConverter();
         
-        for(int i =0;i<is.getSize();i++){
+        for(int i =1;i<=is.getSize();i++){
             imp1 = new ImagePlus(""+i, is.getProcessor(i));
-            mv.put(i,ic.convertTo(imp1));
+            mv.put(i-1,ic.convertTo(imp1));
         }
+        
         
         return mv;
     }
