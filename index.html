@@ -37,37 +37,73 @@
 <h3>
 <a id="download" class="anchor" href="#download" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download</h3>
 
+<p>The <a href="">IJ-OpenCV library</a>.
+Plugins developed with the IJ-OpenCV library: <a href="">plugins</a></p>
+
+<h3>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<p><a href="http://rsb.info.nih.gov/ij/index.html">ImageJ</a> or <a href="http://fiji.sc/Fiji">Fiji</a>.
+Required <a href="https://github.com/bytedeco/javacv">javacv</a> library files: <a href="">javacv.jar</a>, <a href="">javacpp.jar</a>, <a href="">opencv.jar</a>
+And platform-dependent library files:</p>
+
+<ul>
+<li><a href="">32-bit Windows</a></li>
+<li><a href="">64-bit Windows</a></li>
+<li><a href="">64-bit Mac</a></li>
+<li><a href="">32-bit Linux</a></li>
+<li><a href="">64-bit Linux</a></li>
+</ul>
+
 <h3>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h3>
+
+<ol>
+<li>Download and install either ImageJ or Fiji (check that the downloaded version is working with Java 8).</li>
+<li>Unzip the <a href="">file</a> containing the plugins developed with the IJ-OpenCV library, and copy the generated folder in the plugins folder of ImageJ/Fiji.</li>
+<li>Put above jar files (<a href="">ij-opencv.jar</a>, <a href="">javacv.jar</a>, <a href="">javacpp.jar</a>, <a href="">opencv.jar</a>, <a href="">32-bit Windows</a>, <a href="">64-bit Windows</a>, <a href="">64-bit Mac</a>, <a href="">32-bit Linux</a>, <a href="">64-bit Linux</a>) into your ImageJ/Fiji plugins folder.</li>
+</ol>
+
+<p>After restarting ImageJ/Fiji, you will find the option IJ-OpenCV under the plugins menu. That submenu contains the plugins developed with this library.</p>
 
 <h3>
 <a id="system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System requirements</h3>
 
+<p>IJ-OpenCV requires that ImageJ/Fiji works with Java 8.</p>
+
 <h3>
 <a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h3>
+
+<p>The API of the IJ-OpenCV library is available at the following <a href="http://joheras.github.io/IJ-OpenCV/javadoc/">link</a>.</p>
+
+<h3>
+<a id="source-files" class="anchor" href="#source-files" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Source files</h3>
+
+<p>The source files of the IJ-OpenCV library are available at the following <a href="https://github.com/joheras/IJ-OpenCV">link</a>.
+In addition, the source files of the plugins developed with the IJ-OpenCV library are available <a href="">here</a>.</p>
 
 <h3>
 <a id="list-of-ij-opencv-plugins" class="anchor" href="#list-of-ij-opencv-plugins" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>List of IJ-OpenCV plugins</h3>
 
 <ul>
-<li>Adaptive threshold: Given an image, it applies either the adaptive Gaussian threshold or the adaptive mean threshold. <a href="">OpenCV link</a>.</li>
-<li>BGR histogram comparison: Given a stack of images, it compares the images using the BGR histogram and employing different measures . <a href="">OpenCV link</a>.</li>
-<li>Black hat: Given a grayscale image, it returns such an image after applying the black hat morphological operation. <a href="">OpenCV link</a>.</li>
-<li>Canny edge detection: Given an image, it detects its using the Canny edge detection algorithm. <a href="">OpenCV link</a>.</li>
-<li>Convex hull from polygon: Given a polygonal selection, it returns its convex hull . <a href="">OpenCV link</a>.</li>
-<li>Detect circles: Given an image, it detects the circles of such an image using the Hough Circle transform. <a href="">OpenCV link</a>.</li>
-<li>Face detection: Given an image, it detects the faces of the image. <a href="">OpenCV link</a>.</li>
-<li>Find contours: Given an image, it detects the contours of the objects of such an image. <a href="">OpenCV link</a>.</li>
-<li>High dynamic range imaging: Given a stack of images, it creates a high dynamic range image using the exposure fusion. <a href="">OpenCV link</a>.</li>
-<li>Hough Lines: Given an image, it computes the lines of the image using the Hough transform. <a href="">OpenCV link</a>.</li>
-<li>HSV histogram comparison: Given a stack of images, it compares the images using the HSV histogram and employing different measures . <a href="">OpenCV link</a>.</li>
-<li>Keypoint detector: Given an image, it detects its keypoints using different algorithms. <a href="">OpenCV link</a>.</li>
-<li>Kmeans clustering: Given a stack of images, it groups them using the BGR histogram as features and the Kmeans clustering algorithm. <a href="">OpenCV link</a>.</li>
-<li>Non local means denoising: Given an image, it applies non local means denoising. <a href="">OpenCV link</a>.</li>
-<li>RotatedRect from a polygon ROI: Given a polygonal selection, it returns the associated rotated rectangle. <a href="">OpenCV link</a>.</li>
-<li>Stitching: Given an array of images, it stitches them creating a panoramic view. <a href="">OpenCV link</a>.</li>
-<li>Template Matching: Given an image, and a selection (template) in that image, it finds all the other regions of the image that match with the template. <a href="">OpenCV link</a>.</li>
-<li>White Hat: Given a grayscale image, it returns such an image after applying the white hat morphological operation. <a href="">OpenCV link</a>.</li>
+<li>Adaptive threshold: Given an image, it applies either the adaptive Gaussian threshold or the adaptive mean threshold. <a href="http://docs.opencv.org/2.4/modules/imgproc/doc/miscellaneous_transformations.html?highlight=adaptive%20threshold#adaptivethreshold">OpenCV link to the topic</a>.</li>
+<li>BGR histogram comparison: Given a stack of images, it compares the images using the BGR histogram and employing different measures . <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html?highlight=histogram">OpenCV link to the topic</a>.</li>
+<li>Black hat: Given a grayscale image, it returns such an image after applying the black hat morphological operation. <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/opening_closing_hats/opening_closing_hats.html?highlight=black%20hat#black-hat">OpenCV link to the topic</a>.</li>
+<li>Canny edge detection: Given an image, it detects its using the Canny edge detection algorithm. <a href="http://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=canny%20edge%20detection#void%20Canny%28InputArray%20image,%20OutputArray%20edges,%20double%20threshold1,%20double%20threshold2,%20int%20apertureSize,%20bool%20L2gradient%29">OpenCV link to the topic</a>.</li>
+<li>Convex hull from polygon: Given a polygonal selection, it returns its convex hull . <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/shapedescriptors/hull/hull.html?highlight=convex%20hull">OpenCV link to the topic</a>.</li>
+<li>Detect circles: Given an image, it detects the circles of such an image using the Hough Circle transform. <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/hough_circle/hough_circle.html?highlight=hough%20circles">OpenCV link to the topic</a>.</li>
+<li>Face detection: Given an image, it detects the faces of the image. <a href="http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html">OpenCV link to the topic</a>.</li>
+<li>Find contours: Given an image, it detects the contours of the objects of such an image. <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/shapedescriptors/find_contours/find_contours.html?highlight=find%20contours">OpenCV link to the topic</a>.</li>
+<li>High dynamic range imaging: Given a stack of images, it creates a high dynamic range image using the exposure fusion. <a href="http://docs.opencv.org/3.0-beta/doc/tutorials/photo/hdr_imaging/hdr_imaging.html">OpenCV link to the topic</a>.</li>
+<li>Hough Lines: Given an image, it computes the lines of the image using the Hough transform. <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/hough_lines/hough_lines.html?highlight=hough%20lines">OpenCV link to the topic</a>.</li>
+<li>HSV histogram comparison: Given a stack of images, it compares the images using the HSV histogram and employing different measures . <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html?highlight=histogram">OpenCV link to the topic</a>.</li>
+<li>Keypoint detector: Given an image, it detects its keypoints using different algorithms. <a href="http://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html?highlight=keypoint">OpenCV link to the topic</a>.</li>
+<li>Kmeans clustering: Given a stack of images, it groups them using the BGR histogram as features and the Kmeans clustering algorithm. <a href="http://docs.opencv.org/2.4/modules/core/doc/clustering.html?highlight=kmeans">OpenCV link to the topic</a>.</li>
+<li>Non local means denoising: Given an image, it applies non local means denoising. <a href="http://docs.opencv.org/2.4/modules/photo/doc/denoising.html">OpenCV link to the topic</a>.</li>
+<li>RotatedRect from a polygon ROI: Given a polygonal selection, it returns the associated rotated rectangle. <a href="http://docs.opencv.org/2.4/modules/core/doc/basic_structures.html?highlight=rotated%20rect#RotatedRect">OpenCV link to the topic</a>.</li>
+<li>Stitching: Given an array of images, it stitches them creating a panoramic view. <a href="http://docs.opencv.org/2.4/modules/stitching/doc/introduction.html?highlight=stitching">OpenCV link to the topic</a>.</li>
+<li>Template Matching: Given an image, and a selection (template) in that image, it finds all the other regions of the image that match with the template. <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/histograms/template_matching/template_matching.html?highlight=template%20matching">OpenCV link to the topic</a>.</li>
+<li>White Hat: Given a grayscale image, it returns such an image after applying the white hat morphological operation. <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/opening_closing_hats/opening_closing_hats.html?highlight=black%20hat#top-hat">OpenCV link to the topic</a>.</li>
 </ul>
 
 <h3>
