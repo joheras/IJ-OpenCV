@@ -5,10 +5,15 @@
  */
 package ijopencv.ij;
 
-/**
- *
- * @author joheras
- */
-public class ListRoiRectVectorConverter {
+import org.bytedeco.javacpp.opencv_core;
+import org.scijava.Prioritized;
+import org.scijava.Priority;
+import org.scijava.convert.AbstractConverter;
+import org.scijava.convert.Converter;
+import org.scijava.log.LogService;
+import org.scijava.plugin.Plugin;
+
+@Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
+public class ListRoiRectVectorConverter extends AbstractConverter<List<Roi>,opencv_core.RectVector>{
     
 }

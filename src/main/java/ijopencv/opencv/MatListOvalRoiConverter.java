@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ijopencv.ij;
+package ijopencv.opencv;
 
 import org.scijava.Prioritized;
 import org.scijava.Priority;
@@ -13,6 +13,6 @@ import org.scijava.log.LogService;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
-public class ListOvalRoiMatConverter extends AbstractConverter<List<OvalRoi>,Mat>{
+public class MatListOvalRoiConverter extends AbstractConverter<Mat, List<OvalRoi>>{
     
 }

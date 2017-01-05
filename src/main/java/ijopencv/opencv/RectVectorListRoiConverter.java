@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package ijopencv.opencv;
+import org.scijava.Prioritized;
+import org.scijava.Priority;
+import org.scijava.convert.AbstractConverter;
+import org.scijava.convert.Converter;
+import org.scijava.log.LogService;
+import org.scijava.plugin.Plugin;
 
-/**
- *
- * @author joheras
- */
-public class RectVectorListRoiConverter {
+@Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
+public class RectVectorListRoiConverter extends AbstractConverter<RectVector,List<Roi>>{
     
 }

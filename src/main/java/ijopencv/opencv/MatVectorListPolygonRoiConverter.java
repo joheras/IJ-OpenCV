@@ -5,10 +5,14 @@
  */
 package ijopencv.opencv;
 
-/**
- *
- * @author joheras
- */
-public class MatVectorListPolygonRoiConverter {
+import org.scijava.Prioritized;
+import org.scijava.Priority;
+import org.scijava.convert.AbstractConverter;
+import org.scijava.convert.Converter;
+import org.scijava.log.LogService;
+import org.scijava.plugin.Plugin;
+
+@Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
+public class MatVectorListPolygonRoiConverter extends AbstractConverter<MatVector,List<PolygonRoi>>{
     
 }
