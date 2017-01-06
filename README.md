@@ -8,19 +8,13 @@ IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
 ### Download and Installation
 You can download and intall the IJ-OpenCV library using maven:
-```xml
-  <dependency>
-    <groupId></groupId>
-    <artifactId></artifactId>
-    <version></version>
-  </dependency>
-```
+
+
 
 The ImageJ plugins that have been developed using this library can be downloaded using the [ImageJ Update site](http://sites.imagej.net/IJ-OpenCV/).
 
-
-You can download several images to test the plugins at the following [link](https://github.com/joheras/IJ-OpenCV/blob/master/images.zip).
-In order to execute the FaceDetection plugin it is necessary to download the following [file]() and copy it to the plugins folder of ImageJ.
+You can download several images to test the plugins at the following [link](https://github.com/joheras/IJ-OpenCV/blob/master/utils/images.zip).
+In order to execute the FaceDetection plugin it is necessary to download the following [file](https://github.com/joheras/IJ-OpenCV/blob/master/utils/haarcascade_frontalface_alt.xml) and copy it to the plugins folder of ImageJ.
 
 ### System requirements
 IJ-OpenCV requires that ImageJ/Fiji works with Java 8.
