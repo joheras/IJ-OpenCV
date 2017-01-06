@@ -11,10 +11,11 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.OvalRoi;
 import ij.plugin.PlugIn;
-import ijopencv.Circle2fCV;
-import ijopencv.Circle2fConverter;
-import ijopencv.ImageConverter;
-import ijopencv.OpenCV2IJ;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.opencv.Circle2fOvalRoiConverter;
+import ijopencv.utils.Circle2fCV;
+import org.bytedeco.javacpp.FloatPointer;
+
 import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_core.split;
 import static org.bytedeco.javacpp.opencv_highgui.imshow;
@@ -38,10 +39,10 @@ public class DetectOxidationJ_ implements PlugIn {
     
     public OvalRoi detectROI(ImagePlus imp){
         // Converter 
-        ImageConverter ic = new ImageConverter();
+         ImagePlusMatConverter ic = new ImagePlusMatConverter();
+        opencv_core.Mat newImage = ic.convert(imp,opencv_core.Mat.class);
         
         
-        opencv_core.Mat newImage = ic.convertTo(imp);
         opencv_core.Mat hsv = new opencv_core.Mat();
         opencv_imgproc.cvtColor(newImage,hsv,opencv_imgproc.COLOR_BGR2HSV);
         
@@ -55,15 +56,15 @@ public class DetectOxidationJ_ implements PlugIn {
         opencv_imgproc.findContours(thres,contours,opencv_imgproc.RETR_TREE,opencv_imgproc.CHAIN_APPROX_SIMPLE);
         
         opencv_core.Point2f c = new opencv_core.Point2f();
-        float[] r  = new float[1];
+        FloatPointer r  = new FloatPointer();
         
         
         opencv_imgproc.minEnclosingCircle(contours.get(1),c,r);  
         
         // Circle converter
-        Circle2fConverter cc =new Circle2fConverter();
+        Circle2fOvalRoiConverter cc =new Circle2fOvalRoiConverter();
         
-        OvalRoi or = cc.convertFrom(new Circle2fCV(c,r[0]));
+        OvalRoi or = cc.convert(new Circle2fCV(c,r.get(0)),OvalRoi.class);
         
         return or;
     

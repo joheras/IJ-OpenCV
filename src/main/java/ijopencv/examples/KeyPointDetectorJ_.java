@@ -16,8 +16,10 @@ import ij.plugin.PlugIn;
 import static ij.plugin.Thresholder.backgrounds;
 import static ij.plugin.Thresholder.methods;
 import ij.process.AutoThresholder;
-import ijopencv.ImageConverter;
-import ijopencv.KeyPointsConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.opencv.KeyPointVectorPointRoiConverter;
+import ijopencv.opencv.MatImagePlusConverter;
+
 import java.awt.Choice;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -103,17 +105,18 @@ public class KeyPointDetectorJ_ implements PlugIn {
                
 
         // Converters
-        ImageConverter ic = new ImageConverter();
-        KeyPointsConverter kpc = new KeyPointsConverter();
-        Mat imageOpenCV = ic.convertTo(imp);
-
+        ImagePlusMatConverter ic = new ImagePlusMatConverter();
+        KeyPointVectorPointRoiConverter kpc = new KeyPointVectorPointRoiConverter();
+        
+        opencv_core.Mat imageOpenCV = ic.convert(imp,Mat.class);
+        
         
         
         KeyPointVector kpv = new opencv_core.KeyPointVector();
 
         f2d.detect(imageOpenCV, kpv);
 
-        PointRoi pr = kpc.convertFrom(kpv);
+        PointRoi pr = kpc.convert(kpv,PointRoi.class);
         return pr;
 
     }

@@ -13,10 +13,8 @@ import ij.gui.OvalRoi;
 import ij.gui.PolygonRoi;
 import ij.plugin.PlugIn;
 import ij.plugin.frame.RoiManager;
-import ijopencv.CircleCV;
-import ijopencv.IJ2OpenCV;
-import ijopencv.OpenCV2IJ;
-import ijopencv.PolygonConverter;
+import ijopencv.ij.PolygonRoiMatConverter;
+import ijopencv.opencv.MatPointRoiConverter;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_imgproc;
@@ -42,14 +40,14 @@ public class ConvexHullFromPolygonROIJ_ implements PlugIn {
         
         
         // Converter
-        PolygonConverter pc = new PolygonConverter();
+        PolygonRoiMatConverter pc = new PolygonRoiMatConverter();
+        MatPointRoiConverter mpc = new MatPointRoiConverter();
         
-        
-        Mat m = pc.convertTo(r);
+        Mat m = pc.convert(r,Mat.class);
         Mat convexHull = new Mat();
         opencv_imgproc.convexHull(m, convexHull);
         
-        PolygonRoi pr = pc.convertFrom(convexHull);
+        PolygonRoi pr = mpc.convert(convexHull,PolygonRoi.class);
         
         RoiManager rm = new RoiManager();
         rm.add(imp, r, 0);

@@ -11,9 +11,8 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.PolygonRoi;
 import ij.plugin.PlugIn;
-import ijopencv.IJ2OpenCV;
-import ijopencv.Polygon2fConverter;
-import ijopencv.PolygonConverter;
+import ijopencv.ij.PolygonRoiMatConverter;
+import ijopencv.opencv.RotatedRectPolygonRoiConverter;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import static org.bytedeco.javacpp.opencv_core.merge;
@@ -30,17 +29,17 @@ public class RotatedRectFromPolygonROIJ_ implements PlugIn {
         ImagePlus imp = IJ.getImage();
         PolygonRoi pr = (PolygonRoi) imp.getRoi();
         // Converters
-        PolygonConverter pc = new PolygonConverter();
-        Polygon2fConverter p2c = new Polygon2fConverter();
+        PolygonRoiMatConverter pc = new PolygonRoiMatConverter();
+        RotatedRectPolygonRoiConverter p2c = new RotatedRectPolygonRoiConverter();
 
-        Mat m = pc.convertTo(pr);
+        Mat m = pc.convert(pr,Mat.class);
 
         opencv_core.RotatedRect rr = opencv_imgproc.minAreaRect(m);
         opencv_core.Point2f pt = new opencv_core.Point2f(9);
 
         rr.points(pt);
 
-        PolygonRoi newpr = p2c.convertFrom(pt);
+        PolygonRoi newpr = p2c.convert(pt,PolygonRoi.class);
 
         imp.setRoi(newpr);
 

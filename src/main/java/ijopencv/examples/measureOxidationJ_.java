@@ -11,9 +11,9 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.OvalRoi;
 import ij.plugin.PlugIn;
-import ijopencv.CircleCV;
-import ijopencv.CircleConverter;
-import ijopencv.ImageConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.ij.OvalRoiCircleCVConverter;
+import ijopencv.utils.CircleCV;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bytedeco.javacpp.FloatPointer;
@@ -21,6 +21,7 @@ import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.PointerPointer;
 import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_core.CV_8UC1;
+import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_imgproc;
 
 /**
@@ -50,13 +51,13 @@ public class measureOxidationJ_ implements PlugIn {
     
     public double computeOxidation(ImagePlus imp, OvalRoi or) throws Exception {
 
-        ImageConverter ic  = new ImageConverter();
-        CircleConverter cc = new CircleConverter();
+        ImagePlusMatConverter ic  = new ImagePlusMatConverter();
+        OvalRoiCircleCVConverter cc = new OvalRoiCircleCVConverter();
         
-        opencv_core.Mat newImage = ic.convertTo(imp);
+        opencv_core.Mat newImage = ic.convert(imp,Mat.class);
         // Create mask
         opencv_core.Mat mask = new opencv_core.Mat(newImage.size(), CV_8UC1, opencv_core.Scalar.all(0));
-        CircleCV c = cc.convertTo(or);
+        CircleCV c = cc.convert(or,CircleCV.class);
 
         opencv_imgproc.circle(mask, c.getCenter(), c.getRadius(), new opencv_core.Scalar(255, 255, 255, 0), -1, 8, 0);
 

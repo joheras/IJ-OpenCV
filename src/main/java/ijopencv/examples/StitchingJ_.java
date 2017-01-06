@@ -4,9 +4,11 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.PlugIn;
-import ijopencv.ImageConverter;
-import ijopencv.ImageStackConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.ij.ImagePlusMatVectorConverter;
+import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_core.MatVector;
 import org.bytedeco.javacpp.opencv_stitching;
 
 /*
@@ -24,17 +26,17 @@ public class StitchingJ_ implements PlugIn {
     public void run(String arg) {
         ImagePlus imp = IJ.getImage();
         // Converters
-        ImageStackConverter isc = new ImageStackConverter();
-        ImageConverter ic = new ImageConverter();
-
-        opencv_core.MatVector m = isc.convertTo(imp);
+        ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();
+        MatImagePlusConverter ic = new MatImagePlusConverter();
+        
+        opencv_core.MatVector m = isc.convert(imp,MatVector.class);
 
         opencv_stitching.Stitcher stitcher = opencv_stitching.Stitcher.createDefault(true);
 
         opencv_core.Mat res = new opencv_core.Mat();
         stitcher.stitch(m, res);
 
-        ImagePlus resIJ = ic.convertFrom(res);
+        ImagePlus resIJ = ic.convert(res,ImagePlus.class);
         resIJ.show();
     }
 

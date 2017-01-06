@@ -6,12 +6,13 @@ import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
 import ij.text.TextWindow;
-import ijopencv.ImageStackConverter;
+import ijopencv.ij.ImagePlusMatVectorConverter;
 import java.util.ArrayList;
 import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.PointerPointer;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_core.MatVector;
 import org.bytedeco.javacpp.opencv_imgproc;
 import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
 
@@ -43,8 +44,8 @@ public class BGR_Histogram_ComparisonJ_ implements PlugIn {
         }
 
         // Converter
-        ImageStackConverter isc = new ImageStackConverter();
-        opencv_core.MatVector mvec = isc.convertTo(imp);
+        ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();
+        opencv_core.MatVector mvec = isc.convert(imp,MatVector.class);
 
         if (!showDialog()) {
             return;

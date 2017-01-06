@@ -1,16 +1,18 @@
 package ijopencv.examples;
 
-
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.Roi;
 import ij.plugin.PlugIn;
 import ij.plugin.frame.RoiManager;
-import ijopencv.ImageConverter;
-import ijopencv.RoiConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.opencv.MatImagePlusConverter;
+import ijopencv.opencv.RectRoiConverter;
 import java.util.ArrayList;
+import org.bytedeco.javacpp.DoublePointer;
 import org.bytedeco.javacpp.indexer.FloatBufferIndexer;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_core.Mat;
 import static org.bytedeco.javacpp.opencv_core.NORM_MINMAX;
 import static org.bytedeco.javacpp.opencv_core.minMaxLoc;
 import static org.bytedeco.javacpp.opencv_core.normalize;
@@ -47,12 +49,12 @@ public class TemplateMatchingJ_ implements PlugIn {
             IJ.run(imp, "Crop", "");
 
             //Converters
-            ImageConverter ic = new ImageConverter();
-            RoiConverter rc = new RoiConverter();
+            ImagePlusMatConverter ic = new ImagePlusMatConverter();
+            RectRoiConverter rc = new RectRoiConverter();
 
             // Convert the ImageJ images to OpenCV images
-            opencv_core.Mat matching = ic.convertTo(original);
-            opencv_core.Mat template = ic.convertTo(imp);
+            opencv_core.Mat matching = ic.convert(original, Mat.class);
+            opencv_core.Mat template = ic.convert(imp, Mat.class);
 
             opencv_core.Mat gray = new opencv_core.Mat();
             opencv_imgproc.cvtColor(matching, gray, opencv_imgproc.COLOR_BGR2GRAY);
@@ -64,8 +66,8 @@ public class TemplateMatchingJ_ implements PlugIn {
             matchTemplate(gray, template, results, TM_CCOEFF_NORMED);
             normalize(results, results, 0, 1, NORM_MINMAX, -1, new opencv_core.Mat());
 
-            double minVal[] = new double[1000];
-            double maxVal[] = new double[1000];
+            DoublePointer minVal = new DoublePointer();
+            DoublePointer maxVal= new DoublePointer();
             opencv_core.Point minLoc = new opencv_core.Point();
             opencv_core.Point maxLoc = new opencv_core.Point();
             opencv_core.Point matchLoc;
@@ -82,7 +84,7 @@ public class TemplateMatchingJ_ implements PlugIn {
             for (int i = 0; i < locations.size(); i++) {
                 p = locations.get(i);
                 solution = new opencv_core.Rect(p.x(), p.y(), template.cols(), template.rows());
-                solutionIJ = rc.convertFrom(solution);
+                solutionIJ = rc.convert(solution, Roi.class);
                 rm.add(original, solutionIJ, i);
 
             }
@@ -106,9 +108,9 @@ public class TemplateMatchingJ_ implements PlugIn {
             int x = 0;
             while (x < results.cols()) {
                 if (sI.get(y, x) > threshold) {
-                    opencv_core.Point p = new opencv_core.Point(x,y);
+                    opencv_core.Point p = new opencv_core.Point(x, y);
                     points.add(p);
-                     x = x + stepX;
+                    x = x + stepX;
                 } else {
                     x++;
                 }

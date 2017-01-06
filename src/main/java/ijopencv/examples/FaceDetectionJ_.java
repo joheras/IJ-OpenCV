@@ -11,8 +11,9 @@ import ij.ImagePlus;
 import ij.gui.Roi;
 import ij.plugin.PlugIn;
 import ij.plugin.frame.RoiManager;
-import ijopencv.ImageConverter;
-import ijopencv.RoiConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.opencv.MatImagePlusConverter;
+import ijopencv.opencv.RectRoiConverter;
 import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
 import static org.bytedeco.javacpp.opencv_imgproc.cvtColor;
@@ -30,11 +31,11 @@ public class FaceDetectionJ_ implements PlugIn {
         // Get the image
         ImagePlus imp = IJ.getImage();
         //Converters
-        ImageConverter ic = new ImageConverter();
-        RoiConverter rc = new RoiConverter();
+        ImagePlusMatConverter ic = new ImagePlusMatConverter();
+        MatImagePlusConverter mip = new MatImagePlusConverter();
+        RectRoiConverter rc = new RectRoiConverter();
+        opencv_core.Mat img2 = ic.convert(imp,opencv_core.Mat.class);
 
-        // Convert the ImageJ image to OpenCV image
-        opencv_core.Mat img2 = ic.convertTo(imp);
 
         // Detect the faces and store them as an array of rectangles
         opencv_core.RectVector rv = detectFaces(img2);
@@ -43,7 +44,7 @@ public class FaceDetectionJ_ implements PlugIn {
         RoiManager rm = new RoiManager();
         rm.setVisible(true);
         for (int i = 0; i < rv.size(); i++) {
-            Roi r = rc.convertFrom(rv.get(i));
+            Roi r = rc.convert(rv.get(i),Roi.class);
             rm.add(imp, r, 0);
         }
 

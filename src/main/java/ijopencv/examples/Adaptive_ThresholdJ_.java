@@ -5,8 +5,10 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
-import ijopencv.ImageConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_core.Mat;
 import static org.bytedeco.javacpp.opencv_imgproc.ADAPTIVE_THRESH_GAUSSIAN_C;
 import static org.bytedeco.javacpp.opencv_imgproc.ADAPTIVE_THRESH_MEAN_C;
 import static org.bytedeco.javacpp.opencv_imgproc.THRESH_BINARY;
@@ -34,9 +36,10 @@ public class Adaptive_ThresholdJ_ implements PlugIn {
     public void run(String arg) {
         ImagePlus imp = IJ.getImage();
         // Converter
-        ImageConverter ic = new ImageConverter();
+        ImagePlusMatConverter ic = new ImagePlusMatConverter();
+        MatImagePlusConverter mip = new MatImagePlusConverter();
 
-        opencv_core.Mat m = ic.convertTo(imp);
+        opencv_core.Mat m = ic.convert(imp,Mat.class);
        // opencv_imgproc.cvtColor(m, m, opencv_imgproc.COLOR_BGR2GRAY);
         opencv_core.Mat res = new opencv_core.Mat();
 
@@ -61,7 +64,7 @@ public class Adaptive_ThresholdJ_ implements PlugIn {
         
         adaptiveThreshold(m, res, maxValue, adaptiveMethod, thresType, blockSize, 2);
 
-        ImagePlus imp2 = ic.convertFrom(res);
+        ImagePlus imp2 = mip.convert(res,ImagePlus.class);
         imp2.show();
 
     }

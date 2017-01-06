@@ -6,7 +6,7 @@ import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
 import ij.text.TextWindow;
-import ijopencv.ImageStackConverter;
+import ijopencv.ij.ImagePlusMatVectorConverter;
 import java.util.ArrayList;
 import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.IntPointer;
@@ -44,8 +44,8 @@ public class HSV_Histogram_ComparisonJ_ implements PlugIn {
         }
 
         // Converter
-        ImageStackConverter isc = new ImageStackConverter();
-        opencv_core.MatVector mvec = isc.convertTo(imp);
+        ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();
+        opencv_core.MatVector mvec = isc.convert(imp,opencv_core.MatVector.class);
 
         if (!showDialog()) {
             return;

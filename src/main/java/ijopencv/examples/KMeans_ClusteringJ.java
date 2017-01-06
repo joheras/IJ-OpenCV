@@ -6,8 +6,9 @@ import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
 import ij.text.TextWindow;
-import ijopencv.ImageConverter;
-import ijopencv.ImageStackConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+import ijopencv.ij.ImagePlusMatVectorConverter;
+
 import java.util.ArrayList;
 import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.IntPointer;
@@ -16,6 +17,7 @@ import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_core.CV_32F;
 import static org.bytedeco.javacpp.opencv_core.KMEANS_PP_CENTERS;
 import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_core.MatVector;
 import static org.bytedeco.javacpp.opencv_core.kmeans;
 import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
 
@@ -44,9 +46,9 @@ public class KMeans_ClusteringJ implements PlugIn {
         }
 
         // Converters
-        ImageStackConverter isc = new ImageStackConverter();
-        ImageConverter ic = new ImageConverter();
-        opencv_core.MatVector mvec = isc.convertTo(imp);
+        ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();
+        
+        opencv_core.MatVector mvec = isc.convert(imp,MatVector.class);
 
         if (!showDialog()) {
             return;

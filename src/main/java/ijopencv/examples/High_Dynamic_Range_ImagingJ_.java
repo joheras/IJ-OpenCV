@@ -4,8 +4,8 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.PlugIn;
-import ijopencv.ImageConverter;
-import ijopencv.ImageStackConverter;
+import ijopencv.ij.ImagePlusMatConverter;
+
 import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_core.multiply;
 import static org.bytedeco.javacpp.opencv_highgui.imshow;
@@ -30,10 +30,9 @@ public class High_Dynamic_Range_ImagingJ_ implements PlugIn {
         ImagePlus imp = IJ.getImage();
         // Converters
 
-        ImageStackConverter isc = new ImageStackConverter();
-        ImageConverter ic = new ImageConverter();
+        ImagePlusMatConverter isc = new ImagePlusMatConverter();
 
-        opencv_core.MatVector mvec = isc.convertTo(imp);
+        opencv_core.MatVector mvec = isc.convert(imp,opencv_core.MatVector.class);
         opencv_core.Mat res = new opencv_core.Mat();
         opencv_photo.MergeMertens merge_mertens = createMergeMertens();
         merge_mertens.process(mvec, res);
