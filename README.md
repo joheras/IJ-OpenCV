@@ -7,12 +7,12 @@ This new version of IJ-OpenCV has been built on top of SciJava Common using SciJ
 IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
 ### Download and Installation
-You can download and intall the IJ-OpenCV library using maven:
+You can download and intall the IJ-OpenCV library using maven and including the following dependency in your pom.xml file:
 ```xml
   <dependency>
-    <groupId></groupId>
-    <artifactId></artifactId>
-    <version></version>
+    <groupId>io.github.joheras</groupId>
+    <artifactId>IJ-OpenCV</artifactId>
+    <version>1.0</version>
   </dependency>
 ```
 
