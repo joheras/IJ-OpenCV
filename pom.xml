@@ -7,10 +7,10 @@
         <version>12.0.0</version>
         <relativePath />
     </parent>
-    <groupId>org.joheras</groupId>
+    <groupId>io.github.joheras</groupId>
     <artifactId>IJ-OpenCV</artifactId>
     <version>1.0</version>
-    <name>org.joheras:IJ-OpenCV</name>
+    <name>io.github.joheras:IJ-OpenCV</name>
     <description>A library that allows the connection of ImageJ and OpenCV.</description>
     <url>https://github.com/joheras/IJ-OpenCV</url>
     <inceptionYear>2017</inceptionYear>
@@ -43,8 +43,8 @@
         <system>None</system>
     </ciManagement>
     <properties>
-        <package-name>org.joheras.ijopencv</package-name>
-        <main-class>org.joheras.ijopencv</main-class>
+        <package-name>io.github.joheras.ijopencv</package-name>
+        <main-class>io.github.joheras.ijopencv</main-class>
         <license.licenseName>bsd_2</license.licenseName>
         <license.copyrightOwners>University of La Rioja</license.copyrightOwners>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
