@@ -8,6 +8,13 @@ IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
 ### Download and Installation
 You can download and intall the IJ-OpenCV library using maven:
+```xml
+  <dependency>
+    <groupId></groupId>
+    <artifactId></artifactId>
+    <version></version>
+  </dependency>
+```
 
 
 
