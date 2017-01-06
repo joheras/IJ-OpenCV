@@ -42,7 +42,7 @@ public class DetectCirclesJ_ implements PlugIn {
         Mat circles = new Mat();
         opencv_imgproc.HoughCircles(gray,circles,opencv_imgproc.CV_HOUGH_GRADIENT,1.2,100);
         
-        ArrayList<OvalRoi> or = new ArrayList<>();
+        ArrayList<OvalRoi> or = new ArrayList<OvalRoi>();
         or= cc.convert(circles,or.getClass());
         
         RoiManager rm = new RoiManager();

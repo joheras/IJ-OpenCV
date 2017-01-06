@@ -47,7 +47,7 @@ public class MatListOvalRoiConverter extends AbstractConverter<Mat, List<OvalRoi
         split(circles, xyr);
         int num = circles.size().height();
 
-        ArrayList<OvalRoi> result = new ArrayList<>();
+        ArrayList<OvalRoi> result = new ArrayList<OvalRoi>();
 
         for (int i = 0; i < num; i++) {
             int cx = (int) xyr.get(0).getFloatBuffer().get(i);

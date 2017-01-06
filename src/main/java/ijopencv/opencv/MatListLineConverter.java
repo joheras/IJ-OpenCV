@@ -42,7 +42,7 @@ public class MatListLineConverter extends AbstractConverter<Mat, List<Line>> {
     @Override
     public < T> T convert(Object o, Class< T> type) {
         Mat lines = (Mat) o;
-        ArrayList<Line> ijlines = new ArrayList<>();
+        ArrayList<Line> ijlines = new ArrayList<Line>();
         opencv_core.MatVector xy = new opencv_core.MatVector(2);
         split(lines, xy);
         for (int i = 0; i < lines.rows(); i++) {

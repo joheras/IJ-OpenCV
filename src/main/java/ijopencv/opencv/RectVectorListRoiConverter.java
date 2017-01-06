@@ -39,7 +39,7 @@ public class RectVectorListRoiConverter extends AbstractConverter<RectVector, Li
     @Override
     public < T> T convert(Object o, Class< T> type) {
         opencv_core.RectVector rv = (opencv_core.RectVector) o;
-        ArrayList<Roi> rois = new ArrayList<>();
+        ArrayList<Roi> rois = new ArrayList<Roi>();
         RectRoiConverter rc = new RectRoiConverter();
         for (int i = 0; i < rv.size(); i++) {
             rois.add(rc.convert(rv.get(i), Roi.class));

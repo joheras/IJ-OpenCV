@@ -46,7 +46,7 @@ public class FindContoursJ_ implements PlugIn {
         
         opencv_imgproc.findContours(gray,contours,opencv_imgproc.RETR_LIST,opencv_imgproc.CHAIN_APPROX_SIMPLE);
         
-        ArrayList<PolygonRoi> contoursROI = new ArrayList<>();
+        ArrayList<PolygonRoi> contoursROI = new ArrayList<PolygonRoi>();
         contoursROI= pc.convert(contours,contoursROI.getClass());
         
          // Add rectangles to ROI Manager

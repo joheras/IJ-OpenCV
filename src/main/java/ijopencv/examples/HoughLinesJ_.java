@@ -40,7 +40,7 @@ public class HoughLinesJ_ implements PlugIn {
         Mat lines = new Mat();
         opencv_imgproc.HoughLines(dst, lines, 1, opencv_core.CV_PI / 180, 100);
 
-        ArrayList<Line> linesIJ = new ArrayList<>();
+        ArrayList<Line> linesIJ = new ArrayList<Line>();
         linesIJ = lc.convert(lines, linesIJ.getClass());
         RoiManager rm = new RoiManager();
         rm.setVisible(true);

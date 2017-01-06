@@ -39,7 +39,7 @@ public class MatVectorListPolygonRoiConverter extends AbstractConverter<MatVecto
     @Override
     public < T> T convert(Object o, Class< T> type) {
         MatVector mv = (MatVector) o;
-        ArrayList<PolygonRoi> alproi = new ArrayList<>();
+        ArrayList<PolygonRoi> alproi = new ArrayList<PolygonRoi>();
         MatPolygonRoiConverter pg = new MatPolygonRoiConverter();
         for (int i = 0; i < mv.size(); i++) {
             alproi.add(pg.convert(mv.get(i), PolygonRoi.class));
