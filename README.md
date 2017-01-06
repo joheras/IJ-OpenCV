@@ -1,41 +1,32 @@
-IJ-OpenCV is a Java library that allows the communication of ImageJ/Fiji - a software for image analysis that is widely employed in life sciences - and OpenCV - a well-known computer vision library.
+IJ-OpenCV is a Java library that allows the communication of ImageJ - a software for image analysis that is widely employed in life sciences - and OpenCV - a well-known computer vision library.
 
-There are several benefits provided by the communication of ImageJ/Fiji and OpenCV. From the ImageJ/Fiji perspective, this tool is enhanced with several computer vision and machine learning algorithms, avoiding the re-implementation of methods and the connection with several external libraries. From the OpenCV point of view, this library is improved with a simple-to-use GUI and with the functionality to manage regions of interest.
+There are several benefits provided by the communication of ImageJ and OpenCV. From the ImageJ/Fiji perspective, this tool is enhanced with several computer vision and machine learning algorithms, avoiding the re-implementation of methods and the connection with several external libraries. From the OpenCV point of view, this library is improved with a simple-to-use GUI and with the functionality to manage regions of interest.
+
+This new version of IJ-OpenCV has been built on top of SciJava Common using SciJava converters.
 
 IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
-### Download
-The [IJ-OpenCV library](https://github.com/joheras/IJ-OpenCV/releases/download/1.0/IJOpenCV.jar).
-Plugins developed with the IJ-OpenCV library: [plugins](https://github.com/joheras/IJ-OpenCV/raw/master/Plugins/IJ-OpenCV.zip)
+### Download and Installation
+You can download and intall the IJ-OpenCV library using maven:
+```xml
+  <dependency>
+    <groupId></groupId>
+    <artifactId></artifactId>
+    <version></version>
+  </dependency>
+```
 
-### Dependencies
-[ImageJ](http://rsb.info.nih.gov/ij/index.html) or [Fiji](http://fiji.sc/Fiji).
-Required [javacv](https://github.com/bytedeco/javacv) library files: [javacv.jar](https://drive.google.com/open?id=0B-ty45hB_mC7V2hWNTJxT1F3R1k), [javacpp.jar](https://drive.google.com/open?id=0B-ty45hB_mC7d0lZUEJXLUZNR2c), [opencv.jar](https://drive.google.com/open?id=0B-ty45hB_mC7bFI1Ml9tY3JVMmc).
-And platform-dependent library files:
-* [32-bit Windows](https://drive.google.com/open?id=0B-ty45hB_mC7SmhTQ3hjZmw4MkU)
-* [64-bit Windows](https://drive.google.com/open?id=0B-ty45hB_mC7d0ZPSzRSdHpLLWM)
-* [64-bit Mac](https://drive.google.com/open?id=0B-ty45hB_mC7NFpDYkJPU3FsdUk)
-* [32-bit Linux](https://drive.google.com/open?id=0B-ty45hB_mC7MDFiOG9ZLXByU28)
-* [64-bit Linux](https://drive.google.com/open?id=0B-ty45hB_mC7T1E5bmJYZDJCaE0)
+The ImageJ plugins that have been developed using this library can be downloaded using the ImageJ Update site:
 
-### Installation
-1. Download and install either ImageJ or Fiji (check that the downloaded version is working with Java 8).
-2. Unzip the [file](https://github.com/joheras/IJ-OpenCV/raw/master/Plugins/IJ-OpenCV.zip) containing the plugins developed with the IJ-OpenCV library, and copy the generated folder in the plugins folder of ImageJ/Fiji.
-3. Put above jar files ([IJOpenCV.jar](https://github.com/joheras/IJ-OpenCV/releases/download/1.0/IJOpenCV.jar), [javacv.jar](https://drive.google.com/open?id=0B-ty45hB_mC7V2hWNTJxT1F3R1k), [javacpp.jar](https://drive.google.com/open?id=0B-ty45hB_mC7d0lZUEJXLUZNR2c), [opencv.jar](https://drive.google.com/open?id=0B-ty45hB_mC7bFI1Ml9tY3JVMmc), [32-bit Windows](https://drive.google.com/open?id=0B-ty45hB_mC7SmhTQ3hjZmw4MkU), [64-bit Windows](https://drive.google.com/open?id=0B-ty45hB_mC7d0ZPSzRSdHpLLWM), [64-bit Mac](https://drive.google.com/open?id=0B-ty45hB_mC7NFpDYkJPU3FsdUk), [32-bit Linux](https://drive.google.com/open?id=0B-ty45hB_mC7MDFiOG9ZLXByU28), [64-bit Linux](https://drive.google.com/open?id=0B-ty45hB_mC7T1E5bmJYZDJCaE0)) into your ImageJ/Fiji plugins folder.
-
-After restarting ImageJ/Fiji, you will find the option IJ-OpenCV under the plugins menu. That submenu contains the plugins developed with this library.
 
 ### System requirements
 IJ-OpenCV requires that ImageJ/Fiji works with Java 8.
 
-### Documentation
-The API of the IJ-OpenCV library is available at the following [link](http://joheras.github.io/IJ-OpenCV/javadoc/).
-
 ### Source files
 The source files of the IJ-OpenCV library are available at the following [link](https://github.com/joheras/IJ-OpenCV).
-In addition, the source files of the plugins developed with the IJ-OpenCV library are available [here](https://github.com/joheras/IJ-OpenCV/tree/master/Plugins/src).
 
 ### List of IJ-OpenCV plugins
+The source code of the following plugins can be found in the examples folder. 
 * Adaptive threshold: Given an image, it applies either the adaptive Gaussian threshold or the adaptive mean threshold. [OpenCV link to the topic](http://docs.opencv.org/2.4/modules/imgproc/doc/miscellaneous_transformations.html?highlight=adaptive%20threshold#adaptivethreshold).
 * BGR histogram comparison: Given a stack of images, it compares the images using the BGR histogram and employing different measures . [OpenCV link to the topic](http://docs.opencv.org/2.4/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html?highlight=histogram).
 * Black hat: Given a grayscale image, it returns such an image after applying the black hat morphological operation. [OpenCV link to the topic](http://docs.opencv.org/2.4/doc/tutorials/imgproc/opening_closing_hats/opening_closing_hats.html?highlight=black%20hat#black-hat).
