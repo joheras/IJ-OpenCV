@@ -16,15 +16,16 @@ You can download and install the IJ-OpenCV library using maven; namely, includin
   </dependency>
 ```
 
-
-
 The ImageJ plugins that have been developed using this library can be downloaded using the [ImageJ Update site](http://sites.imagej.net/IJ-OpenCV/).
 
 You can download several images to test the plugins at the following [link](https://github.com/joheras/IJ-OpenCV/blob/master/utils/images.zip).
 In order to execute the FaceDetection plugin it is necessary to download the following [file](https://github.com/joheras/IJ-OpenCV/blob/master/utils/haarcascade_frontalface_alt.xml) and copy it to the plugins folder of ImageJ.
 
+### Manual installation
+The recommended installation procedure to include IJ-OpenCV in your project is the use of maven, but you can also directly download the IJ-OpenCV 1.0 binary archive [IJ-OpenCV-1.0.jar](http://search.maven.org/remotecontent?filepath=io/github/joheras/IJ-OpenCV/1.0/IJ-OpenCV-1.0.jar). You will also need to install the binary files of [JavaCV](https://github.com/bytedeco/javacv).
+
 ### System requirements
-IJ-OpenCV requires that ImageJ/Fiji works with Java 8.
+IJ-OpenCV requires that ImageJ works with Java 8.
 
 ### Source files
 The source files of the IJ-OpenCV library are available at the following [link](https://github.com/joheras/IJ-OpenCV).
