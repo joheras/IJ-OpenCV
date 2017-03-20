@@ -5,6 +5,8 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ij.text.TextWindow;
 import ijopencv.ij.ImagePlusMatVectorConverter;
 import java.util.ArrayList;
@@ -26,16 +28,24 @@ import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
  *
  * @author jonathan
  */
-public class HSV_Histogram_ComparisonJ_ implements PlugIn {
+public class HSV_Histogram_ComparisonJ_  implements PlugInFilter {
 
     int hueBins = 8;
     int saturationBins = 8;
     int valueBins = 8;
 
-    @Override
-    public void run(String arg) {
 
-        ImagePlus imp = IJ.getImage();
+
+    ImagePlus imp;
+
+    @Override
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         int stacksize = imp.getStack().getSize();
 
         if (imp.getStack().getSize() == 1) {

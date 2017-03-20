@@ -1,10 +1,11 @@
 package ijopencv.examples;
 
-
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ij.text.TextWindow;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.ij.ImagePlusMatVectorConverter;
@@ -31,11 +32,20 @@ import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
  *
  * @author jonathan
  */
-public class KMeans_ClusteringJ implements PlugIn {
- int nclusters = 2;
+public class KMeans_ClusteringJ implements PlugInFilter {
+
+    int nclusters = 2;
+
+    ImagePlus imp;
 
     @Override
-    public void run(String arg) {
+    public int setup(String arg, ImagePlus imp) {
+        this.imp = imp;
+        return DOES_RGB;
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
 
         ImagePlus imp = IJ.getImage();
         int stacksize = imp.getStack().getSize();
@@ -47,8 +57,8 @@ public class KMeans_ClusteringJ implements PlugIn {
 
         // Converters
         ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();
-        
-        opencv_core.MatVector mvec = isc.convert(imp,MatVector.class);
+
+        opencv_core.MatVector mvec = isc.convert(imp, MatVector.class);
 
         if (!showDialog()) {
             return;
@@ -85,18 +95,16 @@ public class KMeans_ClusteringJ implements PlugIn {
 
         kmeans(data, nclusters, labels, tc, 1, KMEANS_PP_CENTERS);
 
-        String headings = "Image\t Cluster" ;
+        String headings = "Image\t Cluster";
         ArrayList list = new ArrayList();
 
         String row = "";
-       
+
         for (int i = 0; i < labels.rows(); i++) {
-            row = imp.getStack().getSliceLabel(i+1) + "\t" + labels.getIntBuffer().get(i);
+            row = imp.getStack().getSliceLabel(i + 1) + "\t" + labels.getIntBuffer().get(i);
             list.add(row);
 
         }
-        
-        
 
         TextWindow textWindow = new TextWindow("Clustering Table", headings, list, 600, 400);
         textWindow.setVisible(true);
@@ -121,6 +129,5 @@ public class KMeans_ClusteringJ implements PlugIn {
 
         return true;
     }
-    
 
 }

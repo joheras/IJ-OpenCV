@@ -4,6 +4,8 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 
 import org.bytedeco.javacpp.opencv_core;
@@ -23,11 +25,18 @@ import static org.bytedeco.javacpp.opencv_photo.createMergeMertens;
  *
  * @author jonathan
  */
-public class High_Dynamic_Range_ImagingJ_ implements PlugIn {
+public class High_Dynamic_Range_ImagingJ_ implements PlugInFilter {
+
+    ImagePlus imp;
 
     @Override
-    public void run(String arg) {
-        ImagePlus imp = IJ.getImage();
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         // Converters
 
         ImagePlusMatConverter isc = new ImagePlusMatConverter();

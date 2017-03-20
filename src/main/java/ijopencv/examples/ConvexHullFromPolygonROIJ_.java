@@ -12,6 +12,7 @@ import ij.gui.PolygonRoi;
 import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
+import ij.process.ImageProcessor;
 import ijopencv.ij.PolygonRoiMatConverter;
 import ijopencv.opencv.MatPointRoiConverter;
 import org.bytedeco.javacpp.opencv_core;

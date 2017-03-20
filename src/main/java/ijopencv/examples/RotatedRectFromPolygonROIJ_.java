@@ -11,6 +11,8 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.PolygonRoi;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ijopencv.ij.PolygonRoiMatConverter;
 import ijopencv.opencv.RotatedRectPolygonRoiConverter;
 import org.bytedeco.javacpp.opencv_core;
@@ -22,11 +24,18 @@ import org.bytedeco.javacpp.opencv_imgproc;
  *
  * @author jonathan
  */
-public class RotatedRectFromPolygonROIJ_ implements PlugIn {
+public class RotatedRectFromPolygonROIJ_ implements PlugInFilter {
+
+    ImagePlus imp;
 
     @Override
-    public void run(String arg) {
-        ImagePlus imp = IJ.getImage();
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         PolygonRoi pr = (PolygonRoi) imp.getRoi();
         // Converters
         PolygonRoiMatConverter pc = new PolygonRoiMatConverter();

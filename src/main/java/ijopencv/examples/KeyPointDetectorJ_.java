@@ -5,8 +5,6 @@ package ijopencv.examples;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import ij.IJ;
 import ij.ImagePlus;
 import ij.Prefs;
@@ -15,7 +13,9 @@ import ij.gui.PointRoi;
 import ij.plugin.PlugIn;
 import static ij.plugin.Thresholder.backgrounds;
 import static ij.plugin.Thresholder.methods;
+import ij.plugin.filter.PlugInFilter;
 import ij.process.AutoThresholder;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.KeyPointVectorPointRoiConverter;
 import ijopencv.opencv.MatImagePlusConverter;
@@ -39,18 +39,24 @@ import org.bytedeco.javacpp.opencv_xfeatures2d;
  *
  * @author jonathan
  */
-public class KeyPointDetectorJ_ implements PlugIn {
+public class KeyPointDetectorJ_ implements PlugInFilter {
+
+    ImagePlus imp;
+
+    @Override
+    public int setup(String arg, ImagePlus imp) {
+        this.imp = imp;
+        return DOES_RGB;
+    }
 
     public static final String[] methods = {
-        "AGAST","AKAZE","BRISK","FAST","GFFT","KAZE","MSER","ORB","SIFT","SimpleBlob","SURF"
+        "AGAST", "AKAZE", "BRISK", "FAST", "GFFT", "KAZE", "MSER", "ORB", "SIFT", "SimpleBlob", "SURF"
     };
     private String method = methods[0];
     private Vector choices;
-    private ImagePlus imp;
 
     @Override
-    public void run(String arg) {
-        imp = IJ.getImage();
+    public void run(ImageProcessor ip) {
 
         GenericDialog gd = new GenericDialog("Select Keypoint detector");
         gd.addChoice("Method", methods, method);
@@ -75,7 +81,7 @@ public class KeyPointDetectorJ_ implements PlugIn {
         }
         if (method == "ORB") {
             f2d = opencv_features2d.ORB.create();
-            
+
         }
         if (method == "BRISK") {
             f2d = opencv_features2d.BRISK.create();
@@ -88,35 +94,32 @@ public class KeyPointDetectorJ_ implements PlugIn {
         }
         if (method == "SimpleBlob") {
             f2d = opencv_features2d.SimpleBlobDetector.create();
-        } 
-        
+        }
+
         if (method == "KAZE") {
             f2d = KAZE.create();
-        } 
+        }
         if (method == "AGAST") {
             f2d = opencv_features2d.AgastFeatureDetector.create();
-        } 
+        }
         if (method == "FAST") {
             f2d = opencv_features2d.FastFeatureDetector.create();
-        } 
+        }
         if (method == "GFFT") {
             f2d = opencv_features2d.GFTTDetector.create();
         }
-               
 
         // Converters
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
         KeyPointVectorPointRoiConverter kpc = new KeyPointVectorPointRoiConverter();
-        
-        opencv_core.Mat imageOpenCV = ic.convert(imp,Mat.class);
-        
-        
-        
+
+        opencv_core.Mat imageOpenCV = ic.convert(imp, Mat.class);
+
         KeyPointVector kpv = new opencv_core.KeyPointVector();
 
         f2d.detect(imageOpenCV, kpv);
 
-        PointRoi pr = kpc.convert(kpv,PointRoi.class);
+        PointRoi pr = kpc.convert(kpv, PointRoi.class);
         return pr;
 
     }

@@ -10,10 +10,18 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.Roi;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.MatImagePlusConverter;
 import ijopencv.opencv.RectRoiConverter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
 import static org.bytedeco.javacpp.opencv_imgproc.cvtColor;
@@ -24,10 +32,28 @@ import static org.bytedeco.javacpp.opencv_objdetect.CASCADE_SCALE_IMAGE;
  *
  * @author jonathan
  */
-public class FaceDetectionJ_ implements PlugIn {
+public class FaceDetectionJ_ implements PlugInFilter {
+
+    ImagePlus imp;
+    private Object opencv_objdetect;
 
     @Override
-    public void run(String arg) {
+    public int setup(String arg, ImagePlus imp) {
+        this.imp = imp;
+        return DOES_RGB;
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
+        File file = new File("haarcascade_frontalface_alt.xml");
+        if (!file.exists()) {
+            try {
+                InputStream link = this.getClass().getResourceAsStream("/resources/haarcascade_frontalface_alt.xml");
+                Files.copy(link, file.getAbsoluteFile().toPath());
+            } catch (IOException ex) {
+                Logger.getLogger(FaceDetectionJ_.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         // Get the image
         ImagePlus imp = IJ.getImage();
         //Converters

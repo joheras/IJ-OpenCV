@@ -4,6 +4,8 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;
@@ -19,11 +21,18 @@ import org.bytedeco.javacpp.opencv_stitching;
  *
  * @author jonathan
  */
-public class Non_Local_Means_DenoisingJ_ implements PlugIn {
+public class Non_Local_Means_DenoisingJ_ implements PlugInFilter {
+
+    ImagePlus imp;
 
     @Override
-    public void run(String arg) {
-        ImagePlus imp = IJ.getImage();
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         // Converter
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
         MatImagePlusConverter mip = new MatImagePlusConverter();

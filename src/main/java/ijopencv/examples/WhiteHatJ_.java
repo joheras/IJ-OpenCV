@@ -15,7 +15,9 @@ import ij.gui.PointRoi;
 import ij.plugin.PlugIn;
 import static ij.plugin.Thresholder.backgrounds;
 import static ij.plugin.Thresholder.methods;
+import ij.plugin.filter.PlugInFilter;
 import ij.process.AutoThresholder;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.MatImagePlusConverter;
 import java.awt.Choice;
@@ -42,11 +44,21 @@ import org.bytedeco.javacpp.opencv_xfeatures2d;
  *
  * @author jonathan
  */
-public class WhiteHatJ_ implements PlugIn {
+public class WhiteHatJ_ implements PlugInFilter {
 int xSize, ySize;
 
+
+
+    ImagePlus imp;
+
     @Override
-    public void run(String arg) {
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         ImagePlus imp = IJ.getImage();
         // Converter
         ImagePlusMatConverter ic = new ImagePlusMatConverter();

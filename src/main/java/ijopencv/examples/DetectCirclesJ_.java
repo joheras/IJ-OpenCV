@@ -12,7 +12,9 @@ import ij.ImagePlus;
 import ij.gui.OvalRoi;
 import ij.gui.Roi;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.MatListOvalRoiConverter;
 import java.util.ArrayList;
@@ -25,10 +27,18 @@ import org.bytedeco.javacpp.opencv_imgproc;
  *
  * @author jonathan
  */
-public class DetectCirclesJ_ implements PlugIn {
+public class DetectCirclesJ_ implements PlugInFilter{
+
+ImagePlus imp;
 
     @Override
-    public void run(String arg) {
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         ImagePlus imp = IJ.getImage();
         
         // Converters

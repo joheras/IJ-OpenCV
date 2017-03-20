@@ -4,6 +4,8 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.ij.ImagePlusMatVectorConverter;
 import ijopencv.opencv.MatImagePlusConverter;
@@ -20,10 +22,18 @@ import org.bytedeco.javacpp.opencv_stitching;
  *
  * @author jonathan
  */
-public class StitchingJ_ implements PlugIn {
+public class StitchingJ_ implements PlugInFilter {
+
+    ImagePlus imp;
 
     @Override
-    public void run(String arg) {
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         ImagePlus imp = IJ.getImage();
         // Converters
         ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();

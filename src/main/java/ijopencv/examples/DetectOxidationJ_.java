@@ -11,6 +11,8 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.OvalRoi;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.Circle2fOvalRoiConverter;
 import ijopencv.utils.Circle2fCV;
@@ -26,11 +28,18 @@ import org.bytedeco.javacpp.opencv_imgproc;
  *
  * @author jonathan
  */
-public class DetectOxidationJ_ implements PlugIn {
+public class DetectOxidationJ_ implements PlugInFilter {
+
+    ImagePlus imp;
 
     @Override
-    public void run(String arg) {
-        ImagePlus imp = IJ.getImage();
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         OvalRoi or = detectROI(imp);
         imp.setRoi(or);
         
