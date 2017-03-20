@@ -54,6 +54,9 @@ public class OvalRoiCircleCVConverter extends AbstractConverter< OvalRoi, Circle
     
      @Override
     public boolean canConvert(Object src, Type dest) {
+        if(!(src instanceof OvalRoi)){
+            return false;
+        }
         OvalRoi or = (OvalRoi)src;
         Rectangle rect = or.getPolygon().getBounds();
         if (rect.width != rect.height) {

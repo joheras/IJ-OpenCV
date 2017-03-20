@@ -52,6 +52,9 @@ public class PolygonRoiRotatedRectConverter extends AbstractConverter< PolygonRo
 
     @Override
     public boolean canConvert(Object src, Type dest) {
+                if(!(src instanceof PolygonRoi)){
+            return false;
+        }
         PolygonRoi pr =(PolygonRoi)src;
      if(!pr.isArea() || pr.getPolygon().npoints != 4 ){
             return false;

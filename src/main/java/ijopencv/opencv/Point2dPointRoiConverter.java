@@ -47,6 +47,9 @@ public class Point2dPointRoiConverter extends AbstractConverter< Point2d, PointR
 
     @Override
     public boolean canConvert(Object src, Type dest) {
+                        if(!(src instanceof Point2d)){
+            return false;
+        }
         Point2d p =(Point2d)src;
         if (p.sizeof() != 2) {
             return false;

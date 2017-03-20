@@ -80,6 +80,12 @@ public class ListOvalRoiMatConverter extends AbstractConverter<List<OvalRoi>, Ma
 
     @Override
     public boolean canConvert(Object src, Type dest) {
+        
+        if(!(src instanceof ArrayList<?>)){
+            return false;
+        }
+        
+        
         ArrayList<OvalRoi> alor = (ArrayList<OvalRoi>) src;
 
         for (int i = 0; i < alor.size(); i++) {

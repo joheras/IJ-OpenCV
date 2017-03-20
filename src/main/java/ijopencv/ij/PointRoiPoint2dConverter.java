@@ -32,10 +32,10 @@ public class PointRoiPoint2dConverter extends AbstractConverter< PointRoi, Point
 
     @Override
     public < T> T convert(Object o, Class< T> type) {
-        PointRoi pr = (PointRoi)o;
+        PointRoi pr = (PointRoi) o;
         opencv_core.Point2d p = new opencv_core.Point2d(pr.getXCoordinates()[0], pr.getYCoordinates()[0]);
-        return (T)p;
-    
+        return (T) p;
+
     }
 
     @Override
@@ -50,12 +50,14 @@ public class PointRoiPoint2dConverter extends AbstractConverter< PointRoi, Point
 
     @Override
     public boolean canConvert(Object src, Type dest) {
-        PointRoi pr =(PointRoi)src;
+        if (!(src instanceof PointRoi)) {
+            return false;
+        }
+        PointRoi pr = (PointRoi) src;
         if (pr.getType() != Roi.POINT) {
             return false;
         }
         return true;
     }
-    
-    
+
 }

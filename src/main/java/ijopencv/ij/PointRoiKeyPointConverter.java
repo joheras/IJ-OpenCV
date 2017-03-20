@@ -50,6 +50,9 @@ public class PointRoiKeyPointConverter extends AbstractConverter< PointRoi, KeyP
 
     @Override
     public boolean canConvert(Object src, Type dest) {
+        if(!(src instanceof PointRoi)){
+            return false;
+        }
         PointRoi pr =(PointRoi)src;
         if (pr.getType() != Roi.POINT) {
             return false;

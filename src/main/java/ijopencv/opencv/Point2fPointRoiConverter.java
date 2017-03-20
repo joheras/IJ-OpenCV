@@ -48,6 +48,9 @@ public class Point2fPointRoiConverter extends AbstractConverter< Point2f, PointR
 
     @Override
     public boolean canConvert(Object src, Type dest) {
+                                if(!(src instanceof Point2f)){
+            return false;
+        }
         opencv_core.Point2f p =(opencv_core.Point2f)src;
         if (p.sizeof() != 2) {
             return false;

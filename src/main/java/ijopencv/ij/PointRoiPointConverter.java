@@ -15,7 +15,6 @@ import org.scijava.plugin.Plugin;
 @Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
 public class PointRoiPointConverter extends AbstractConverter< PointRoi, Point> {
 
-   
     @Override
     public int compareTo(Prioritized o) {
         return super.compareTo(o);
@@ -33,10 +32,10 @@ public class PointRoiPointConverter extends AbstractConverter< PointRoi, Point> 
 
     @Override
     public < T> T convert(Object o, Class< T> type) {
-        PointRoi pr = (PointRoi)o;
+        PointRoi pr = (PointRoi) o;
         opencv_core.Point p = new opencv_core.Point(pr.getXCoordinates()[0], pr.getYCoordinates()[0]);
-        return (T)p;
-    
+        return (T) p;
+
     }
 
     @Override
@@ -51,11 +50,14 @@ public class PointRoiPointConverter extends AbstractConverter< PointRoi, Point> 
 
     @Override
     public boolean canConvert(Object src, Type dest) {
-        PointRoi pr =(PointRoi)src;
+        if (!(src instanceof PointRoi)) {
+            return false;
+        }
+        PointRoi pr = (PointRoi) src;
         if (pr.getType() != Roi.POINT) {
             return false;
         }
         return true;
     }
-    
+
 }

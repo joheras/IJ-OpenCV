@@ -47,6 +47,9 @@ public class KeyPointPointRoiConverter extends AbstractConverter< KeyPoint, Poin
 
     @Override
     public boolean canConvert(Object src, Type dest) {
+                if(!(src instanceof KeyPoint)){
+            return false;
+        }
         KeyPoint p = (KeyPoint)src;
         if (p.sizeof() != 2) {
             return false;

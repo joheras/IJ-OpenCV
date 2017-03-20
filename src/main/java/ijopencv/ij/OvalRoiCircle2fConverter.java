@@ -4,6 +4,7 @@ import ij.gui.OvalRoi;
 import ijopencv.utils.Circle2fCV;
 import java.awt.Rectangle;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.RotatedRect;
 import static org.bytedeco.javacpp.opencv_core.merge;
@@ -53,6 +54,9 @@ public class OvalRoiCircle2fConverter extends AbstractConverter< OvalRoi, Circle
 
     @Override
     public boolean canConvert(Object src, Type dest) {
+        if(!(src instanceof OvalRoi)){
+            return false;
+        }
         OvalRoi or = (OvalRoi)src;
         Rectangle rect = or.getPolygon().getBounds();
         if (rect.width != rect.height) {
