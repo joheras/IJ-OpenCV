@@ -11,6 +11,8 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;
@@ -21,12 +23,20 @@ import org.bytedeco.javacpp.opencv_imgproc;
  *
  * @author jonathan
  */
-public class CannyEdgeDetectionJ_ implements PlugIn {
+public class CannyEdgeDetectionJ_ implements PlugInFilter {
 
     double minT, maxT;
 
+    ImagePlus imp;
+
     @Override
-    public void run(String arg) {
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
+
+    @Override
+    public void run(ImageProcessor ip) {
         ImagePlus imp = IJ.getImage();
         // Converter
         

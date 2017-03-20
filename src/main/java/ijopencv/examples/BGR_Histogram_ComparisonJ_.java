@@ -5,6 +5,8 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 import ij.text.TextWindow;
 import ijopencv.ij.ImagePlusMatVectorConverter;
 import java.util.ArrayList;
@@ -26,16 +28,23 @@ import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
  *
  * @author jonathan
  */
-public class BGR_Histogram_ComparisonJ_ implements PlugIn {
+public class BGR_Histogram_ComparisonJ_ implements PlugInFilter {
 
     int blueBins = 8;
     int greenBins = 8;
     int redBins = 8;
+    
+    ImagePlus imp;
 
     @Override
-    public void run(String arg) {
+    public int setup(String arg, ImagePlus imp) {
+        this.imp=imp;
+        return DOES_RGB; 
+    }
 
-        ImagePlus imp = IJ.getImage();
+
+    @Override
+    public void run(ImageProcessor ip) {
         int stacksize = imp.getStack().getSize();
 
         if (imp.getStack().getSize() == 1) {
