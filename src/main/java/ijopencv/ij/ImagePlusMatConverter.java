@@ -1,8 +1,16 @@
 package ijopencv.ij;
 
 import ij.ImagePlus;
+import ij.process.ByteProcessor;
+import ij.process.ColorProcessor;
+import ij.process.FloatProcessor;
+import ij.process.ImageProcessor;
+import ij.process.ShortProcessor;
 import java.awt.Frame;
 import java.awt.image.BufferedImage;
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.FloatPointer;
+import org.bytedeco.javacpp.ShortPointer;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import static org.bytedeco.javacpp.opencv_core.merge;
@@ -15,6 +23,11 @@ import org.scijava.convert.AbstractConverter;
 import org.scijava.convert.Converter;
 import org.scijava.log.LogService;
 import org.scijava.plugin.Plugin;
+
+/** 
+ * @authors J. Heras and W. Burger
+ */
+
 
 @Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
 public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
@@ -37,37 +50,7 @@ public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
     @Override
     public < T> T convert(Object o, Class< T> type) {
         ImagePlus imp = (ImagePlus) o;
-        // Converter ImageJ image to Frame
-        Java2DFrameConverter converterToFrame = new Java2DFrameConverter();
-        // To covert an ImageJ image to Frame, we must obtain the BufferedImage
-        BufferedImage bi = imp.getBufferedImage();
-        // Actual conversion
-        org.bytedeco.javacv.Frame frame = converterToFrame.convert(bi);
-
-        // Convert Frame to OpenCV Mat
-        OpenCVFrameConverter.ToMat converterToMat = new OpenCVFrameConverter.ToMat();
-        opencv_core.Mat img = converterToMat.convert(frame);
-        // OpenCV expects a BGR image, but it is actually an RGB image, so we 
-        // must split the channels and merge them in the correct order
-
-        /* We should check if the image is in rgb or in grayscale, but that 
-         remains as further work 
-         */
-        if (imp.getType() == ImagePlus.COLOR_RGB) { // RGB image
-
-            opencv_core.MatVector rgb = new opencv_core.MatVector(3);
-            split(img, rgb);
-            opencv_core.Mat img2 = new opencv_core.Mat();
-
-            opencv_core.Mat[] bgrarray = {rgb.get(3), rgb.get(2), rgb.get(1)};
-            opencv_core.MatVector bgr = new opencv_core.MatVector(bgrarray);
-
-            merge(bgr, img2);
-
-            return (T) img2;
-        } else {
-            return (T) img;
-        }
+        return (T) toMat(imp.getProcessor());
 
     }
 
@@ -80,4 +63,101 @@ public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
     public Class< ImagePlus> getInputType() {
         return ImagePlus.class;
     }
+
+    // --------------------------------------------------------------------
+    // ImageJ -> OpenCV (ImageProcessor -> Mat)
+    // --------------------------------------------------------------------
+    /**
+     * Dispatcher method. Duplicates {@link ImageProcessor} to the corresponding
+     * OpenCV image of type {@link Mat}. TODO: Could be coded more elegantly ;-)
+     *
+     * @param ip The {@link ImageProcessor} to be converted
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(ImageProcessor ip) {
+        Mat mat = null;
+        if (ip instanceof ByteProcessor) {
+            mat = toMat((ByteProcessor) ip);
+        } else if (ip instanceof ColorProcessor) {
+            mat = toMat((ColorProcessor) ip);
+        } else if (ip instanceof ShortProcessor) {
+            mat = toMat((ShortProcessor) ip);
+        } else if (ip instanceof FloatProcessor) {
+            mat = toMat((FloatProcessor) ip);
+        } else {
+            throw new IllegalArgumentException("cannot convert to Mat: " + ip);
+        }
+        return mat;
+    }
+
+    /**
+     * Duplicates {@link ByteProcessor} to the corresponding OpenCV image of
+     * type {@link Mat}.
+     *
+     * @param bp The {@link ByteProcessor} to be converted
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(ByteProcessor bp) {
+        final int w = bp.getWidth();
+        final int h = bp.getHeight();
+        final byte[] pixels = (byte[]) bp.getPixels();
+
+        // version A - copies the pixel data to a new array
+//		Size size = new Size(w, h);
+//		Mat mat = new Mat(size, opencv_core.CV_8UC1);
+//		mat.data().put(bData);
+        // version 2 - reuses the existing pixel array
+        return new Mat(h, w, opencv_core.CV_8UC1, new BytePointer(pixels));
+    }
+
+    /**
+     * Duplicates {@link ShortProcessor} to the corresponding OpenCV image of
+     * type {@link Mat}.
+     *
+     * @param bp The {@link ShortProcessor} to be converted
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(ShortProcessor sp) {
+        final int w = sp.getWidth();
+        final int h = sp.getHeight();
+        final short[] pixels = (short[]) sp.getPixels();
+        return new Mat(h, w, opencv_core.CV_16UC1, new ShortPointer(pixels));
+    }
+
+    /**
+     * Duplicates {@link FloatProcessor} to the corresponding OpenCV image of
+     * type {@link Mat}.
+     *
+     * @param bp The {@link FloatProcessor} to be converted
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(FloatProcessor cp) {
+        final int w = cp.getWidth();
+        final int h = cp.getHeight();
+        final float[] pixels = (float[]) cp.getPixels();
+        return new Mat(h, w, opencv_core.CV_32FC1, new FloatPointer(pixels));
+    }
+
+    /**
+     * Duplicates {@link ColorProcessor} to the corresponding OpenCV image of
+     * type {@link Mat}.
+     *
+     * @param bp The {@link ColorProcessor} to be converted
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(ColorProcessor cp) {
+        final int w = cp.getWidth();
+        final int h = cp.getHeight();
+        final int[] pixels = (int[]) cp.getPixels();
+        byte[] bData = new byte[w * h * 3];
+
+        // convert int-encoded RGB values to byte array
+        for (int i = 0; i < pixels.length; i++) {
+            bData[i * 3 + 0] = (byte) ((pixels[i] >> 16) & 0xFF);	// red
+            bData[i * 3 + 1] = (byte) ((pixels[i] >> 8) & 0xFF);	// grn
+            bData[i * 3 + 2] = (byte) ((pixels[i]) & 0xFF);	// blu
+        }
+        return new Mat(h, w, opencv_core.CV_8UC3, new BytePointer(bData));
+    }
+
 }

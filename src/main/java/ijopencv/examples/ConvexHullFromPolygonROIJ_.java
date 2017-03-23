@@ -30,7 +30,7 @@ public class ConvexHullFromPolygonROIJ_ implements PlugInFilter {
     @Override
     public int setup(String arg, ImagePlus imp) {
         this.imp = imp;
-        return DOES_ALL;
+        return DOES_ALL + NO_CHANGES;
     }
 
     @Override

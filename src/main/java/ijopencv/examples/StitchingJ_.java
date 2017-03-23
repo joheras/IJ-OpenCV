@@ -29,7 +29,7 @@ public class StitchingJ_ implements PlugInFilter {
     @Override
     public int setup(String arg, ImagePlus imp) {
         this.imp=imp;
-        return DOES_RGB; 
+        return DOES_ALL + NO_CHANGES;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class Non_Local_Means_DenoisingJ_ implements PlugInFilter {
     @Override
     public int setup(String arg, ImagePlus imp) {
         this.imp=imp;
-        return DOES_RGB; 
+        return DOES_ALL + NO_CHANGES;
     }
 
     @Override

@@ -46,7 +46,7 @@ public class KeyPointDetectorJ_ implements PlugInFilter {
     @Override
     public int setup(String arg, ImagePlus imp) {
         this.imp = imp;
-        return DOES_RGB;
+        return DOES_ALL + NO_CHANGES;
     }
 
     public static final String[] methods = {
