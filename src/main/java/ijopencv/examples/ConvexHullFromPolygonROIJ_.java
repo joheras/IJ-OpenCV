@@ -7,15 +7,12 @@ package ijopencv.examples;
  */
 import ij.IJ;
 import ij.ImagePlus;
-import ij.gui.OvalRoi;
 import ij.gui.PolygonRoi;
-import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
 import ijopencv.ij.PolygonRoiMatConverter;
 import ijopencv.opencv.MatPointRoiConverter;
-import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_imgproc;
 

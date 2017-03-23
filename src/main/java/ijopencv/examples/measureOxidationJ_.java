@@ -10,7 +10,6 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.OvalRoi;
-import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;

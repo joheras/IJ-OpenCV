@@ -9,7 +9,6 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.Roi;
-import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;

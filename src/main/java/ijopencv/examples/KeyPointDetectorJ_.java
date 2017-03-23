@@ -5,33 +5,18 @@ package ijopencv.examples;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import ij.IJ;
 import ij.ImagePlus;
-import ij.Prefs;
 import ij.gui.GenericDialog;
 import ij.gui.PointRoi;
-import ij.plugin.PlugIn;
-import static ij.plugin.Thresholder.backgrounds;
-import static ij.plugin.Thresholder.methods;
 import ij.plugin.filter.PlugInFilter;
-import ij.process.AutoThresholder;
 import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.KeyPointVectorPointRoiConverter;
-import ijopencv.opencv.MatImagePlusConverter;
-
-import java.awt.Choice;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Vector;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.KeyPointVector;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_features2d;
-import static org.bytedeco.javacpp.opencv_features2d.AGAST;
-import static org.bytedeco.javacpp.opencv_features2d.AGAST;
-import static org.bytedeco.javacpp.opencv_features2d.AGAST;
-import org.bytedeco.javacpp.opencv_features2d.Feature2D;
 import org.bytedeco.javacpp.opencv_features2d.KAZE;
 import org.bytedeco.javacpp.opencv_xfeatures2d;
 

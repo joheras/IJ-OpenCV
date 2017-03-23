@@ -7,10 +7,8 @@ package ijopencv.examples;
  */
 
 
-import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.OvalRoi;
-import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
@@ -20,8 +18,6 @@ import org.bytedeco.javacpp.FloatPointer;
 
 import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_core.split;
-import static org.bytedeco.javacpp.opencv_highgui.imshow;
-import static org.bytedeco.javacpp.opencv_highgui.waitKey;
 import org.bytedeco.javacpp.opencv_imgproc;
 
 /**

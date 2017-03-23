@@ -5,10 +5,8 @@ package ijopencv.examples;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.Line;
-import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;

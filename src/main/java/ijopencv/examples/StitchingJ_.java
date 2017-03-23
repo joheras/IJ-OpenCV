@@ -3,10 +3,8 @@ package ijopencv.examples;
 
 import ij.IJ;
 import ij.ImagePlus;
-import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
-import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.ij.ImagePlusMatVectorConverter;
 import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;

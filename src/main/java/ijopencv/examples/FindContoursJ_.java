@@ -10,13 +10,10 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.PolygonRoi;
-import ij.gui.Roi;
-import ij.plugin.PlugIn;
 import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
-import ijopencv.opencv.MatImagePlusConverter;
 import ijopencv.opencv.MatVectorListPolygonRoiConverter;
 
 import java.util.ArrayList;
