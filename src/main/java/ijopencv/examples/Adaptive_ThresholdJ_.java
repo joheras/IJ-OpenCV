@@ -9,6 +9,7 @@ import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_imgproc;
 import static org.bytedeco.javacpp.opencv_imgproc.ADAPTIVE_THRESH_GAUSSIAN_C;
 import static org.bytedeco.javacpp.opencv_imgproc.ADAPTIVE_THRESH_MEAN_C;
 import static org.bytedeco.javacpp.opencv_imgproc.THRESH_BINARY;
@@ -73,7 +74,7 @@ public class Adaptive_ThresholdJ_ implements PlugInFilter {
         MatImagePlusConverter mip = new MatImagePlusConverter();
 
         opencv_core.Mat m = ic.convert(imp,Mat.class);
-       // opencv_imgproc.cvtColor(m, m, opencv_imgproc.COLOR_BGR2GRAY);
+        opencv_imgproc.cvtColor(m, m, opencv_imgproc.COLOR_BGR2GRAY);
         opencv_core.Mat res = new opencv_core.Mat();
 
         if (!showDialog()) {
