@@ -19,7 +19,8 @@ import org.scijava.log.LogService;
 import org.scijava.plugin.Plugin;
 
 /** 
- * @authors J. Heras and W. Burger
+ * @author J. Heras
+ * @author W. Burger
  */
 
 
@@ -108,7 +109,7 @@ public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
      * Duplicates {@link ShortProcessor} to the corresponding OpenCV image of
      * type {@link Mat}.
      *
-     * @param bp The {@link ShortProcessor} to be converted
+     * @param sp The {@link ShortProcessor} to be converted
      * @return The OpenCV image (of type {@link Mat})
      */
     public static Mat toMat(ShortProcessor sp) {
@@ -122,7 +123,7 @@ public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
      * Duplicates {@link FloatProcessor} to the corresponding OpenCV image of
      * type {@link Mat}.
      *
-     * @param bp The {@link FloatProcessor} to be converted
+     * @param cp The {@link FloatProcessor} to be converted
      * @return The OpenCV image (of type {@link Mat})
      */
     public static Mat toMat(FloatProcessor cp) {
@@ -136,7 +137,7 @@ public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
      * Duplicates {@link ColorProcessor} to the corresponding OpenCV image of
      * type {@link Mat}.
      *
-     * @param bp The {@link ColorProcessor} to be converted
+     * @param cp The {@link ColorProcessor} to be converted
      * @return The OpenCV image (of type {@link Mat})
      */
     public static Mat toMat(ColorProcessor cp) {
