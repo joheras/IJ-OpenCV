@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.scijava</groupId>
         <artifactId>pom-scijava</artifactId>
         <version>23.1.1</version>
         <relativePath />
     </parent>
+
     <groupId>io.github.joheras</groupId>
     <artifactId>IJ-OpenCV</artifactId>
     <version>1.0.1-SNAPSHOT</version>
+
     <name>io.github.joheras:IJ-OpenCV</name>
     <description>A library that allows the connection of ImageJ and OpenCV.</description>
     <url>https://github.com/joheras/IJ-OpenCV</url>
@@ -24,34 +27,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    <mailingLists>
-        <mailingList>
-            <name>ImageJ Forum</name>
-            <archive>http://forum.imagej.net/</archive>
-        </mailingList>
-    </mailingLists>
-    <scm>
-        <connection>scm:git:git@github.com:joheras/IJ-OpenCV.git</connection>
-        <developerConnection>scm:git:git@github.com:joheras/IJ-OpenCV.git</developerConnection>
-        <url>git@github.com:joheras/IJ-OpenCV.git</url>
-    </scm>
-    <issueManagement>
-        <system>GitHub Issues</system>
-        <url>https://github.com/joheras/IJ-OpenCV/issues</url>
-    </issueManagement>
-    <ciManagement>
-        <system>None</system>
-    </ciManagement>
-    <properties>
-        <package-name>io.github.joheras.ijopencv</package-name>
-        <main-class>io.github.joheras.ijopencv</main-class>
-        <license.licenseName>bsd_2</license.licenseName>
-        <license.copyrightOwners>University of La Rioja</license.copyrightOwners>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <scijava.jvm.version>1.8</scijava.jvm.version>
-    </properties>
+
     <developers>
         <developer>
             <id>joheras</id>
@@ -75,12 +51,38 @@
             <name>Vico Pascual</name>
         </contributor>
     </contributors>
-    <repositories>
-        <repository>
-            <id>imagej.public</id>
-            <url>http://maven.imagej.net/content/groups/public</url>
-        </repository>
-    </repositories>
+
+    <mailingLists>
+        <mailingList>
+            <name>ImageJ Forum</name>
+            <archive>http://forum.imagej.net/</archive>
+        </mailingList>
+    </mailingLists>
+
+    <scm>
+        <connection>scm:git:git@github.com:joheras/IJ-OpenCV.git</connection>
+        <developerConnection>scm:git:git@github.com:joheras/IJ-OpenCV.git</developerConnection>
+        <url>git@github.com:joheras/IJ-OpenCV.git</url>
+    </scm>
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/joheras/IJ-OpenCV/issues</url>
+    </issueManagement>
+    <ciManagement>
+        <system>None</system>
+    </ciManagement>
+
+    <properties>
+        <package-name>io.github.joheras.ijopencv</package-name>
+        <main-class>io.github.joheras.ijopencv</main-class>
+        <license.licenseName>bsd_2</license.licenseName>
+        <license.copyrightOwners>University of La Rioja</license.copyrightOwners>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <scijava.jvm.version>1.8</scijava.jvm.version>
+    </properties>
+
     <dependencies>   
         <!-- ImageJ dependencies -->
         <dependency>
@@ -115,4 +117,11 @@
         
 
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>imagej.public</id>
+            <url>http://maven.imagej.net/content/groups/public</url>
+        </repository>
+    </repositories>
 </project>
