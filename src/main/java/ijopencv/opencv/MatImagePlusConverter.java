@@ -18,7 +18,8 @@ import org.scijava.log.LogService;
 import org.scijava.plugin.Plugin;
 
 /**
- * @authors J. Heras and W. Burger
+ * @author J. Heras
+ * @author W. Burger
  */
 @Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
 public class MatImagePlusConverter extends AbstractConverter< Mat, ImagePlus> {
