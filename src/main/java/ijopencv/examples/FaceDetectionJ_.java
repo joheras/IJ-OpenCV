@@ -55,8 +55,6 @@ public class FaceDetectionJ_ implements Command {
                 Logger.getLogger(FaceDetectionJ_.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        // Get the image
-        ImagePlus imp = IJ.getImage();
         //Converters
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
         MatImagePlusConverter mip = new MatImagePlusConverter();
