@@ -19,6 +19,9 @@ import static org.bytedeco.javacpp.opencv_core.normalize;
 import org.bytedeco.javacpp.opencv_imgproc;
 import static org.bytedeco.javacpp.opencv_imgproc.TM_CCOEFF_NORMED;
 import static org.bytedeco.javacpp.opencv_imgproc.matchTemplate;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,19 +32,15 @@ import static org.bytedeco.javacpp.opencv_imgproc.matchTemplate;
  *
  * @author jonathan
  */
-public class TemplateMatchingJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Template matching")
+public class TemplateMatchingJ_ implements Command {
 
-    ImagePlus imp;
 
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_ALL + NO_CHANGES;
-    }
+    @Parameter
+    private ImagePlus imp;
 
     @Override
-    public void run(ImageProcessor ip) {
-        ImagePlus imp = IJ.getImage();
+    public void run() {
         ImagePlus original = (ImagePlus) imp.clone();
 
         Roi r = imp.getRoi();

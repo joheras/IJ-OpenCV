@@ -26,24 +26,26 @@ import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
 import static org.bytedeco.javacpp.opencv_imgproc.cvtColor;
 import org.bytedeco.javacpp.opencv_objdetect;
 import static org.bytedeco.javacpp.opencv_objdetect.CASCADE_SCALE_IMAGE;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /**
  *
  * @author jonathan
  */
-public class FaceDetectionJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Face detection")
+public class FaceDetectionJ_ implements Command {
 
-    ImagePlus imp;
+    @Parameter
+    private ImagePlus imp;
+
     private Object opencv_objdetect;
 
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp = imp;
-        return DOES_RGB;
-    }
+ 
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
         File file = new File("haarcascade_frontalface_alt.xml");
         if (!file.exists()) {
             try {

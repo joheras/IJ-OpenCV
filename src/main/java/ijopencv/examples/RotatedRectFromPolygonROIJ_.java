@@ -16,23 +16,23 @@ import ijopencv.opencv.RotatedRectPolygonRoiConverter;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_imgproc;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /**
  *
  * @author jonathan
  */
-public class RotatedRectFromPolygonROIJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Rotatedrect from polygon roi")
+public class RotatedRectFromPolygonROIJ_ implements Command {
 
-    ImagePlus imp;
-
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_ALL + NO_CHANGES;
-    }
+  
+    @Parameter
+    private ImagePlus imp;
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
         PolygonRoi pr = (PolygonRoi) imp.getRoi();
         // Converters
         PolygonRoiMatConverter pc = new PolygonRoiMatConverter();

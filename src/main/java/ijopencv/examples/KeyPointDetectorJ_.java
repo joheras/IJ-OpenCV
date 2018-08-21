@@ -19,21 +19,21 @@ import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_features2d;
 import org.bytedeco.javacpp.opencv_features2d.KAZE;
 import org.bytedeco.javacpp.opencv_xfeatures2d;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /**
  *
  * @author jonathan
  */
-public class KeyPointDetectorJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Keypoint detector")
+public class KeyPointDetectorJ_ implements Command {
 
-    ImagePlus imp;
 
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp = imp;
-        return DOES_ALL + NO_CHANGES;
-    }
-
+    @Parameter
+    private ImagePlus imp;
+    
     public static final String[] methods = {
         "AGAST", "AKAZE", "BRISK", "FAST", "GFFT", "KAZE", "MSER", "ORB", "SIFT", "SimpleBlob", "SURF"
     };
@@ -41,7 +41,7 @@ public class KeyPointDetectorJ_ implements PlugInFilter {
     private Vector choices;
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
 
         GenericDialog gd = new GenericDialog("Select Keypoint detector");
         gd.addChoice("Method", methods, method);

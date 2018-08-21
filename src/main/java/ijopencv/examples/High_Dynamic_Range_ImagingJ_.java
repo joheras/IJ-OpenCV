@@ -12,6 +12,9 @@ import static org.bytedeco.javacpp.opencv_highgui.imshow;
 import static org.bytedeco.javacpp.opencv_highgui.waitKey;
 import org.bytedeco.javacpp.opencv_photo;
 import static org.bytedeco.javacpp.opencv_photo.createMergeMertens;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 
 /*
@@ -23,18 +26,15 @@ import static org.bytedeco.javacpp.opencv_photo.createMergeMertens;
  *
  * @author jonathan
  */
-public class High_Dynamic_Range_ImagingJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>High dynamic range imaging")
+public class High_Dynamic_Range_ImagingJ_ implements Command {
 
-    ImagePlus imp;
-
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_ALL + NO_CHANGES;
-    }
+ 
+    @Parameter
+    private ImagePlus imp;
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
         // Converters
 
         ImagePlusMatConverter isc = new ImagePlusMatConverter();

@@ -8,6 +8,9 @@ import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_photo;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,18 +21,14 @@ import org.bytedeco.javacpp.opencv_photo;
  *
  * @author jonathan
  */
-public class Non_Local_Means_DenoisingJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Non local means denoising")
+public class Non_Local_Means_DenoisingJ_ implements Command {
 
-    ImagePlus imp;
-
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_ALL + NO_CHANGES;
-    }
+    @Parameter
+    private ImagePlus imp;
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
         // Converter
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
         MatImagePlusConverter mip = new MatImagePlusConverter();

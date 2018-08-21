@@ -24,23 +24,23 @@ import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_core.CV_8UC1;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_imgproc;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /**
  *
  * @author jonathan
  */
-public class measureOxidationJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Measure oxidation")
+public class measureOxidationJ_ implements Command {
 
-    ImagePlus imp;
 
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_RGB; 
-    }
+    @Parameter
+    private ImagePlus imp;
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
         try {
             
             OvalRoi or = (OvalRoi)imp.getRoi();

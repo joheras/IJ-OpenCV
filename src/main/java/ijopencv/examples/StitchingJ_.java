@@ -10,6 +10,9 @@ import ijopencv.opencv.MatImagePlusConverter;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.MatVector;
 import org.bytedeco.javacpp.opencv_stitching;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,19 +23,16 @@ import org.bytedeco.javacpp.opencv_stitching;
  *
  * @author jonathan
  */
-public class StitchingJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Stitching")
+public class StitchingJ_ implements Command {
 
-    ImagePlus imp;
 
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_ALL + NO_CHANGES;
-    }
+    @Parameter
+    private ImagePlus imp;
 
     @Override
-    public void run(ImageProcessor ip) {
-        ImagePlus imp = IJ.getImage();
+    public void run() {
+        
         // Converters
         ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();
         MatImagePlusConverter ic = new MatImagePlusConverter();

@@ -19,23 +19,22 @@ import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.opencv_core;
 import static org.bytedeco.javacpp.opencv_core.split;
 import org.bytedeco.javacpp.opencv_imgproc;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /**
  *
  * @author jonathan
  */
-public class DetectOxidationJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Detect oxidation")
+public class DetectOxidationJ_ implements Command {
 
-    ImagePlus imp;
-
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_RGB; 
-    }
+    @Parameter
+    private ImagePlus imp;
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
         OvalRoi or = detectROI(imp);
         imp.setRoi(or);
         

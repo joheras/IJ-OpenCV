@@ -21,25 +21,23 @@ import static org.bytedeco.javacpp.opencv_imgproc.MORPH_BLACKHAT;
 import static org.bytedeco.javacpp.opencv_imgproc.MORPH_RECT;
 import static org.bytedeco.javacpp.opencv_imgproc.getStructuringElement;
 import static org.bytedeco.javacpp.opencv_imgproc.morphologyEx;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 /**
  *
  * @author jonathan
  */
-public class BlackHatJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>BlackHat")
+public class BlackHatJ_ implements Command {
 int xSize, ySize;
 
-    ImagePlus imp;
-
+   @Parameter
+    private ImagePlus imp;
+   
     @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-       return DOES_ALL + NO_CHANGES;
-    }
-
-    @Override
-    public void run(ImageProcessor ip) {
-        ImagePlus imp = IJ.getImage();
+    public void run() {
         // Converter
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
         MatImagePlusConverter mip = new MatImagePlusConverter();

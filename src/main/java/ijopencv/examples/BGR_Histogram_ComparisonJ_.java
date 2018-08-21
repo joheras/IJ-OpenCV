@@ -16,6 +16,9 @@ import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.MatVector;
 import org.bytedeco.javacpp.opencv_imgproc;
 import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
+import org.scijava.command.Command;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
 
 
 /*
@@ -27,23 +30,19 @@ import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
  *
  * @author jonathan
  */
-public class BGR_Histogram_ComparisonJ_ implements PlugInFilter {
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>BGR Histogram Comparison")
+public class BGR_Histogram_ComparisonJ_ implements Command {
 
     int blueBins = 8;
     int greenBins = 8;
     int redBins = 8;
     
-    ImagePlus imp;
-
-    @Override
-    public int setup(String arg, ImagePlus imp) {
-        this.imp=imp;
-        return DOES_RGB; 
-    }
+    @Parameter
+    private ImagePlus imp;
 
 
     @Override
-    public void run(ImageProcessor ip) {
+    public void run() {
         int stacksize = imp.getStack().getSize();
 
         if (imp.getStack().getSize() == 1) {
