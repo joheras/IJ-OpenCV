@@ -61,9 +61,6 @@ public class DetectCirclesJ_ implements Command {
         // Launch ImageJ as usual.
         final ImageJ ij = new ImageJ();
         ij.launch(args);
-
-        // Launch the "OpenImage" command.
-        ij.command().run(DetectCirclesJ_.class, true);
     }
 
 }
