@@ -36,7 +36,6 @@ public class DetectCirclesJ_ implements Command{
 
     @Override
     public void run() {
-        ImagePlus imp = IJ.getImage();
         
         // Converters
          ImagePlusMatConverter ic = new ImagePlusMatConverter();
