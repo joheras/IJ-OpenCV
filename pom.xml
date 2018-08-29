@@ -11,7 +11,7 @@
 
     <groupId>io.github.joheras</groupId>
     <artifactId>IJ-OpenCV</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.2</version>
 
     <name>io.github.joheras:IJ-OpenCV</name>
     <description>A library that allows the connection of ImageJ and OpenCV.</description>
@@ -27,7 +27,16 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <developers>
         <developer>
             <id>joheras</id>
@@ -52,7 +61,9 @@
         </contributor>
         <contributor>
             <name>Jan Eglinger</name>
-            <properties><id>imagejan</id></properties>
+            <properties>
+                <id>imagejan</id>
+            </properties>
         </contributor>
     </contributors>
 
