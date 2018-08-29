@@ -2,7 +2,7 @@ package ijopencv.opencv;
 
 import ij.gui.Roi;
 import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_core.Rectf;
+import org.bytedeco.javacpp.opencv_core.Rect2f;
 import org.scijava.Prioritized;
 import org.scijava.Priority;
 import org.scijava.convert.AbstractConverter;
@@ -11,7 +11,7 @@ import org.scijava.log.LogService;
 import org.scijava.plugin.Plugin;
 
 @Plugin(type = Converter.class, priority = Priority.LOW_PRIORITY)
-public class RectfRoiConverter extends AbstractConverter< Rectf, Roi> {
+public class RectfRoiConverter extends AbstractConverter< Rect2f, Roi> {
 
     @Override
     public int compareTo(Prioritized o) {
@@ -30,7 +30,7 @@ public class RectfRoiConverter extends AbstractConverter< Rectf, Roi> {
 
     @Override
     public < T> T convert(Object o, Class< T> type) {
-     opencv_core.Rectf rect = (opencv_core.Rectf)o; 
+     opencv_core.Rect2f rect = (opencv_core.Rect2f)o; 
         Roi r = new Roi(rect.x(), rect.y(), rect.width(), rect.height());
         return (T)r;
     }
@@ -41,7 +41,7 @@ public class RectfRoiConverter extends AbstractConverter< Rectf, Roi> {
     }
 
     @Override
-    public Class< Rectf> getInputType() {
-        return Rectf.class;
+    public Class< Rect2f> getInputType() {
+        return Rect2f.class;
     }
 }
