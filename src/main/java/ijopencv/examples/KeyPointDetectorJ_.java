@@ -5,6 +5,7 @@ package ijopencv.examples;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import net.imagej.ImageJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.gui.PointRoi;
@@ -12,6 +13,7 @@ import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.KeyPointVectorPointRoiConverter;
+import ijopencv.ij.PointRoiKeyPointVectorConverter;
 import java.util.Vector;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.KeyPointVector;
@@ -30,10 +32,9 @@ import org.scijava.plugin.Plugin;
 @Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Keypoint detector")
 public class KeyPointDetectorJ_ implements Command {
 
-
     @Parameter
     private ImagePlus imp;
-    
+
     public static final String[] methods = {
         "AGAST", "AKAZE", "BRISK", "FAST", "GFFT", "KAZE", "MSER", "ORB", "SIFT", "SimpleBlob", "SURF"
     };
@@ -97,7 +98,9 @@ public class KeyPointDetectorJ_ implements Command {
         // Converters
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
         KeyPointVectorPointRoiConverter kpc = new KeyPointVectorPointRoiConverter();
-
+        PointRoiKeyPointVectorConverter roi2kp = new PointRoiKeyPointVectorConverter();
+        
+        
         opencv_core.Mat imageOpenCV = ic.convert(imp, Mat.class);
 
         KeyPointVector kpv = new opencv_core.KeyPointVector();
@@ -105,8 +108,17 @@ public class KeyPointDetectorJ_ implements Command {
         f2d.detect(imageOpenCV, kpv);
 
         PointRoi pr = kpc.convert(kpv, PointRoi.class);
+        roi2kp.convert(pr, KeyPointVector.class);
+        
+        
         return pr;
 
+    }
+
+    public static void main(final String... args) throws Exception {
+        // Launch ImageJ as usual.
+        final ImageJ ij = new ImageJ();
+        ij.launch(args);
     }
 
 }

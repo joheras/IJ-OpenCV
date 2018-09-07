@@ -31,10 +31,10 @@ public class PointRoiPoint2fVectorConverter extends AbstractConverter< PointRoi,
     @Override
     public < T> T convert(Object o, Class< T> type) {
          PointRoi pr = (PointRoi)o; 
-        opencv_core.Point2fVector pv = new opencv_core.Point2fVector();
+        
         int[] xpoints = pr.getPolygon().xpoints;
         int[] ypoints = pr.getPolygon().ypoints;
-
+        opencv_core.Point2fVector pv = new opencv_core.Point2fVector(xpoints.length);
         for (int i = 0; i < xpoints.length; i++) {
             pv.put(i, new opencv_core.Point2f(xpoints[i], ypoints[i]));
         }

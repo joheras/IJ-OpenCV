@@ -39,7 +39,7 @@ public class ListPolygonRoiMatVectorConverter extends AbstractConverter<List<Pol
     @Override
     public < T> T convert(Object o, Class< T> type) {
         ArrayList<PolygonRoi> aproi = (ArrayList<PolygonRoi>) o;
-        opencv_core.MatVector mv = new opencv_core.MatVector();
+        opencv_core.MatVector mv = new opencv_core.MatVector(aproi.size());
         PolygonRoiMatConverter pg = new PolygonRoiMatConverter();
 
         for (int i = 0; i < aproi.size(); i++) {

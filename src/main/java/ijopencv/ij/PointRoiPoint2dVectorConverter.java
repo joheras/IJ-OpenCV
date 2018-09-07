@@ -30,16 +30,16 @@ public class PointRoiPoint2dVectorConverter extends AbstractConverter< PointRoi,
 
     @Override
     public < T> T convert(Object o, Class< T> type) {
-        PointRoi pr = (PointRoi)o; 
-        opencv_core.Point2dVector pv = new opencv_core.Point2dVector();
+        PointRoi pr = (PointRoi) o;
+
         int[] xpoints = pr.getPolygon().xpoints;
         int[] ypoints = pr.getPolygon().ypoints;
-
+        opencv_core.Point2dVector pv = new opencv_core.Point2dVector(xpoints.length);
         for (int i = 0; i < xpoints.length; i++) {
             pv.put(i, new opencv_core.Point2d(xpoints[i], ypoints[i]));
         }
-        return (T)pv;
-    
+        return (T) pv;
+
     }
 
     @Override
