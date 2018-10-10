@@ -27,7 +27,7 @@ import org.scijava.plugin.Plugin;
  *
  * @author jonathan
  */
-@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV>Adaptive Threshold")
+@Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Adaptive Threshold")
 public class Adaptive_ThresholdJ_ implements Command {
 
     String method;
