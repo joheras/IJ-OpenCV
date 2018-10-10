@@ -30,11 +30,11 @@ public class PointRoiKeyPointVectorConverter extends AbstractConverter< PointRoi
 
     @Override
     public < T> T convert(Object o, Class< T> type) {
-        PointRoi pr = (PointRoi)o;
-        KeyPointVector pv = new KeyPointVector();
+        PointRoi pr = (PointRoi) o;
+
         int[] xpoints = pr.getPolygon().xpoints;
         int[] ypoints = pr.getPolygon().ypoints;
-
+        KeyPointVector pv = new KeyPointVector(xpoints.length);
         for (int i = 0; i < xpoints.length; i++) {
             pv.put(i, new opencv_core.KeyPoint(xpoints[i], ypoints[i], 1));
         }
