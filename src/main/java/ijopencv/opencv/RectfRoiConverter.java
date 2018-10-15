@@ -42,6 +42,6 @@ public class RectfRoiConverter extends AbstractConverter< Rect2f, Roi> {
 
     @Override
     public Class< Rect2f> getInputType() {
-        return Rect2f.class;
+        return opencv_core.Rect2f.class;
     }
 }

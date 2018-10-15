@@ -28,6 +28,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.distanceTransform;
 import org.bytedeco.javacpp.opencv_imgproc;
 import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.Mat;
+import org.scijava.widget.ChoiceWidget;
 
 
 
@@ -44,8 +45,11 @@ import org.bytedeco.javacpp.opencv_core.Mat;
 @Plugin(type = Command.class, menuPath = "Plugins>IJ-OpenCV-plugins>DistanceTransform")
 public class DistanceTransform implements Command {
     
-    String measure_method; // select the measurement method from openCV 
-    String speed; // select the correctness / speed for openCV
+    @Parameter(label= "Measure_Method: ", style= ChoiceWidget.LIST_BOX_STYLE, choices= {"4Move", "8Move", "Euclidian"})
+    String measure_method = "Euclidian"; // select the measurement method from openCV 
+    @Parameter(label= "Speed: ", style= ChoiceWidget.LIST_BOX_STYLE, choices= {"fast", "precise"})
+    String speed = "precise"; // select the correctness / speed for openCV
+    @Parameter(label = "Threshold: ")
     int threshold = 0; // select the threshold for 8bit gray, 0 means no threshold
    
     public DistanceTransform() {
@@ -53,25 +57,7 @@ public class DistanceTransform implements Command {
 	}
     
     
-    private boolean showDialog() {
-        GenericDialog gd = new GenericDialog("Distance Transform");
-        String[] items_measure = {"4Move", "8Move", "Euclidian"};
-        String[] items_speed = {"fast", "precise"};
-        gd.addChoice("Measure_Method", items_measure, items_measure[2]);
-        gd.addChoice("speed", items_speed, items_speed[1]);
-        gd.addNumericField("Threshold", threshold, 0);
-        
-        gd.showDialog();
-        if (gd.wasCanceled()) {
-            return false;
-        }
-
-        measure_method = gd.getNextChoice();
-        speed = gd.getNextChoice();
-        threshold = (int) gd.getNextNumber();
-        
-        return true;
-    }
+    
     
 	//
     // Feel free to add more parameters here...
@@ -84,9 +70,9 @@ public class DistanceTransform implements Command {
     	//Converter classes
     	ImagePlusMatConverter ic = new ImagePlusMatConverter();
 		MatImagePlusConverter mip = new MatImagePlusConverter();
-        if (!showDialog()) {
-            return;
-        }
+//        if (!showDialog()) {
+//            return;
+//        }
         // transform strings from dialog into openCV int variable
         int moveMethod;
         if (measure_method == "4Move") {
