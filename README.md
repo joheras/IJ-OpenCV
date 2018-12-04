@@ -9,11 +9,21 @@ IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 ### Download and Installation
 You can download and install the IJ-OpenCV library using maven; namely, including the following dependency in your pom.xml file:
 ```xml
+       <repositories>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+      </repositories>
+      ...
+      <dependencies>
         <dependency>
             <groupId>io.github.joheras</groupId>
             <artifactId>IJ-OpenCV</artifactId>
             <version>1.2.1-SNAPSHOT</version>
         </dependency>
+      ...
+      </dependencies>
 ```
 
 The ImageJ plugins that have been developed using this library can be downloaded using the [ImageJ Update site](http://sites.imagej.net/IJ-OpenCV/).
