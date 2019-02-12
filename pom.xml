@@ -23,7 +23,8 @@
     </organization>
     <licenses>
         <license>
-            <name>Simplified BSD License</name>
+            <name>GPLv3.0</name>
+	    <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
