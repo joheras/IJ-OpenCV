@@ -23,7 +23,8 @@
     </organization>
     <licenses>
         <license>
-            <name>Simplified BSD License</name>
+            <name>GPLv3.0</name>
+	    <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -134,7 +135,7 @@
     <repositories>
         <repository>
             <id>imagej.public</id>
-            <url>http://maven.imagej.net/content/groups/public</url>
+            <url>https://maven.imagej.net/content/groups/public</url>
         </repository>
     </repositories>
 

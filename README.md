@@ -9,11 +9,21 @@ IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 ### Download and Installation
 You can download and install the IJ-OpenCV library using maven; namely, including the following dependency in your pom.xml file:
 ```xml
+      <repositories>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+      </repositories>
+      ...
+      <dependencies>
         <dependency>
             <groupId>io.github.joheras</groupId>
             <artifactId>IJ-OpenCV</artifactId>
             <version>1.2.1-SNAPSHOT</version>
         </dependency>
+      ...
+      </dependencies>
 ```
 
 The ImageJ plugins that have been developed using this library can be downloaded using the [ImageJ Update site](http://sites.imagej.net/IJ-OpenCV/).
@@ -26,6 +36,9 @@ The recommended installation procedure to include IJ-OpenCV in your project is t
 
 ### System requirements
 IJ-OpenCV requires that ImageJ works with Java 8.
+
+### Documentation
+Have a look at the [wiki](https://github.com/joheras/IJ-OpenCV/wiki) section for some help about how to use IJ-OpenCV in your own scripts.
 
 ### Source files
 The source files of the IJ-OpenCV library are available at the following [link](https://github.com/joheras/IJ-OpenCV).
@@ -72,6 +85,9 @@ This second video shows how the following plugins work:
 
 [![Everything Is AWESOME](http://www.mailpoet.com/wp-content/uploads/2012/01/wysija-youtube-color-player.png)](https://www.youtube.com/watch?v=BMGhKQZWhs8)
 
+### Issues
+To report bug and/or issues, you can open a [github issue](https://github.com/joheras/IJ-OpenCV/issues) provided you have a GitHub account (free).  
+You can also create a topic on the [central image processing forum](forum.image.sc), and tagging @joheras and/or @LThomas. 
 
 ### Contact
 Jónathan Heras (joheras@gmail.com)
