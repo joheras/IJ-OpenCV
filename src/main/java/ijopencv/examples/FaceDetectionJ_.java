@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bytedeco.javacpp.opencv_core;
@@ -66,7 +67,7 @@ public class FaceDetectionJ_ implements Command {
         opencv_core.Mat img_gray = new opencv_core.Mat();
         cvtColor(image, img_gray, CV_BGR2GRAY);
 
-        opencv_objdetect.CascadeClassifier faceclassifier = new opencv_objdetect.CascadeClassifier(IJ.getDirectory("imagej") + "lib/haarcascade_frontalface_alt.xml");
+        opencv_objdetect.CascadeClassifier faceclassifier = new opencv_objdetect.CascadeClassifier(Paths.get(IJ.getDirectory("imagej"),"lib","haarcascade_frontalface_alt.xml").toString());
 
         opencv_core.RectVector rv = new opencv_core.RectVector();
 
