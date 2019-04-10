@@ -6,7 +6,16 @@ This new version of IJ-OpenCV has been built on top of SciJava Common using SciJ
 
 IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
-### Download and Installation
+### Citation
+If you use IJ-OpenCV for your research please cite :  
+* Domínguez, César, Jónathan Heras, and Vico Pascual. "IJ-OpenCV: Combining ImageJ and OpenCV for processing images in biomedicine." Computers in biology and medicine 84 (2017): 189-194.
+
+### Installation
+
+#### - In Fiji
+In Fiji, the library and plugins can be installed by simply ticking the IJ-OpenCV update site in your Fiji updater (_Help>Update>Manage Update sites_).
+
+#### - With Maven
 You can download and install the IJ-OpenCV library using maven; namely, including the following dependency in your pom.xml file:
 ```xml
       <repositories>
@@ -26,13 +35,12 @@ You can download and install the IJ-OpenCV library using maven; namely, includin
       </dependencies>
 ```
 
-The ImageJ plugins that have been developed using this library can be downloaded using the [ImageJ Update site](http://sites.imagej.net/IJ-OpenCV/).
+#### - Manual installation (ex: ImageJ)
+The recommended installation procedure to include IJ-OpenCV in your project is the use of maven, but you can also directly download the IJ-OpenCV 1.0 binary archive [IJ-OpenCV-1.0.jar](http://search.maven.org/remotecontent?filepath=io/github/joheras/IJ-OpenCV/1.0/IJ-OpenCV-1.0.jar). You will also need to install the binary files of [JavaCV](https://github.com/bytedeco/javacv).  
+In order to execute the FaceDetection plugin it is necessary to download the following [file](https://github.com/joheras/IJ-OpenCV/blob/master/utils/haarcascade_frontalface_alt.xml) and copy it to a new subfolder `lib` in ImageJ installation folder.
 
+#### - Test images
 You can download several images to test the plugins at the following [link](https://github.com/joheras/IJ-OpenCV/blob/master/utils/images.zip).
-In order to execute the FaceDetection plugin it is necessary to download the following [file](https://github.com/joheras/IJ-OpenCV/blob/master/utils/haarcascade_frontalface_alt.xml) and copy it to the plugins folder of ImageJ.
-
-### Manual installation
-The recommended installation procedure to include IJ-OpenCV in your project is the use of maven, but you can also directly download the IJ-OpenCV 1.0 binary archive [IJ-OpenCV-1.0.jar](http://search.maven.org/remotecontent?filepath=io/github/joheras/IJ-OpenCV/1.0/IJ-OpenCV-1.0.jar). You will also need to install the binary files of [JavaCV](https://github.com/bytedeco/javacv).
 
 ### System requirements
 IJ-OpenCV requires that ImageJ works with Java 8.
@@ -51,7 +59,7 @@ The source code of the following plugins can be found in the examples folder.
 * Canny edge detection: Given an image, it detects its using the Canny edge detection algorithm. [OpenCV link to the topic](http://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=canny%20edge%20detection#void%20Canny%28InputArray%20image,%20OutputArray%20edges,%20double%20threshold1,%20double%20threshold2,%20int%20apertureSize,%20bool%20L2gradient%29).
 * Convex hull from polygon: Given a polygonal selection, it returns its convex hull . [OpenCV link to the topic](http://docs.opencv.org/2.4/doc/tutorials/imgproc/shapedescriptors/hull/hull.html?highlight=convex%20hull).
 * Detect circles: Given an image, it detects the circles of such an image using the Hough Circle transform. [OpenCV link to the topic](http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/hough_circle/hough_circle.html?highlight=hough%20circles).
-* Face detection: Given an image, it detects the faces of the image. [OpenCV link to the topic](http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html).
+* Face detection: Given an image, it detects the faces of the image. With ImageJ, it is necessary to download the following [file](https://github.com/joheras/IJ-OpenCV/blob/master/utils/haarcascade_frontalface_alt.xml) and copy it to a new subfolder `lib` in ImageJ installation folder. [OpenCV link to the topic](http://docs.opencv.org/2.4/modules/contrib/doc/facerec/facerec_tutorial.html).
 * Find contours: Given an image, it detects the contours of the objects of such an image. [OpenCV link to the topic](http://docs.opencv.org/2.4/doc/tutorials/imgproc/shapedescriptors/find_contours/find_contours.html?highlight=find%20contours).
 * High dynamic range imaging: Given a stack of images, it creates a high dynamic range image using the exposure fusion. [OpenCV link to the topic](http://docs.opencv.org/3.0-beta/doc/tutorials/photo/hdr_imaging/hdr_imaging.html).
 * Hough Lines: Given an image, it computes the lines of the image using the Hough transform. [OpenCV link to the topic](http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/hough_lines/hough_lines.html?highlight=hough%20lines).
