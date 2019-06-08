@@ -7,6 +7,7 @@ package ijopencv.examples;
  */
 import ij.ImagePlus;
 import ij.gui.Line;
+import ij.gui.GenericDialog;
 import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
@@ -34,6 +35,18 @@ public class HoughLinesJ_  implements Command {
     
     @Override
     public void run() {
+		
+		// GUI
+		GenericDialog gd = new GenericDialog("Hough Line");
+		gd.addNumericField("Minimum line length (pixels)", 10, 0);
+		gd.addNumericField("Step_line spacing iteration (pixels)", 10, 0);
+		gd.addNumericField("Start_angle iteration (degrees)", 0, 0);
+		gd.addNumericField("Stop_angle iteration (degrees)", 180, 0);
+		gd.addNumericField("Step_angle iteration (degrees)", 1, 0);
+		
+		
+		
+		
         // Converters
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
         MatImagePlusConverter mip = new MatImagePlusConverter();
