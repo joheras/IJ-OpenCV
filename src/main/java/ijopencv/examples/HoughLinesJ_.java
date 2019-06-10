@@ -8,7 +8,6 @@ package ijopencv.examples;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.Line;
-import ij.gui.GenericDialog;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
 import ijopencv.ij.ImagePlusMatConverter;
@@ -32,6 +31,21 @@ public class HoughLinesJ_  implements Command {
     @Parameter
     private ImagePlus imp;
     
+    @Parameter(label="Minimum line length (pixels)", min="1")
+    private int min_length;
+    
+    @Parameter(label="Step_line spacing iteration (pixels)", min="1")
+    private double step_line;
+    
+    @Parameter(label="Start_angle iteration (degrees)", min="0")
+    private double min_theta;
+
+    @Parameter(label="Stop_angle iteration (degrees)", min="0", max="180")
+    private double max_theta;
+    
+    @Parameter(label="Step_angle iteration (degrees)", min="1")
+    private double step_theta;
+    
     @Override
     public void run() {
         
@@ -41,41 +55,19 @@ public class HoughLinesJ_  implements Command {
     		IJ.error("Image must be a 8-bit binary image (0-255 exclusively)");
     	}
     	
-    	else {		
-	    	// GUI
-			GenericDialog gd = new GenericDialog("Hough Line");
-			gd.addNumericField("Minimum line length (pixels)", 10, 0);
-			gd.addNumericField("Step_line spacing iteration (pixels)", 10, 0);
-			gd.addNumericField("Start_angle iteration (degrees)", 0, 0);
-			gd.addNumericField("Stop_angle iteration (degrees)", 180, 0);
-			gd.addNumericField("Step_angle iteration (degrees)", 1, 0);
-			gd.showDialog();
-	    	
-			if ( gd.wasCanceled() ) {
-				return;
-			}
+    	else {	
+			// Do line detection
+			ArrayList<Line> linesIJ = HoughLines(imp, min_length, step_line, min_theta, max_theta, step_theta);
 			
-			else if ( gd.wasOKed() ) {
-				// Recover inputs
-				int min_length    = (int)gd.getNextNumber();
-				double step_line  = gd.getNextNumber();
-				double min_theta  = gd.getNextNumber();
-				double max_theta  = gd.getNextNumber();
-				double step_theta = gd.getNextNumber();
-				
-				// Do line detection
-				ArrayList<Line> linesIJ = HoughLines(imp, min_length, step_line, min_theta, max_theta, step_theta);
-				
-				// Add lines to RoiManager
-		        RoiManager rm = new RoiManager();
-		        rm.setVisible(true);
+			// Add lines to RoiManager
+	        RoiManager rm = new RoiManager();
+	        rm.setVisible(true);
 
-		        for (int i = 0; i < linesIJ.size(); i++) {
-		            rm.add(imp, linesIJ.get(i), i);
+	        for (int i = 0; i < linesIJ.size(); i++) {
+	            rm.add(imp, linesIJ.get(i), i);
 		        }
 			}
     	}
-    }
 		
 	/**
 	 * Hough lines detection: Perform line detection on a binary image
