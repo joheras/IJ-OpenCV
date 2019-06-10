@@ -31,20 +31,20 @@ public class HoughLinesJ_  implements Command {
     @Parameter
     private ImagePlus imp;
     
-    @Parameter(label="Minimum line length (pixels)", min="1")
-    private int min_length;
+    @Parameter(label="Minimum line length (pixels)", min="1", stepSize="10")
+    private int min_length=10;
     
-    @Parameter(label="Step_line spacing iteration (pixels)", min="1")
-    private double step_line;
+    @Parameter(label="Step_line spacing iteration (pixels)", min="1", stepSize="10")
+    private double step_line=5;
     
-    @Parameter(label="Start_angle iteration (degrees)", min="0")
-    private double min_theta;
+    @Parameter(label="Start_angle iteration (degrees)", min="0", stepSize="10")
+    private double min_theta=0;
 
-    @Parameter(label="Stop_angle iteration (degrees)", min="0", max="180")
-    private double max_theta;
+    @Parameter(label="Stop_angle iteration (degrees)", min="0", max="180", stepSize="10")
+    private double max_theta=180;
     
-    @Parameter(label="Step_angle iteration (degrees)", min="1")
-    private double step_theta;
+    @Parameter(label="Step_angle iteration (degrees)", min="1", stepSize="5")
+    private double step_theta=5;
     
     @Override
     public void run() {
