@@ -31,11 +31,12 @@ public class HoughLinesJ_  implements Command {
 
     @Parameter
     private ImagePlus imp;
-    private ImageProcessor ImProc = imp.getProcessor();
     
     @Override
     public void run() {
-    	
+        
+    	ImageProcessor ImProc = imp.getProcessor();
+   
     	if ( !ImProc.isBinary() ) { //Hough line is defined for binary images
     		IJ.error("Image must be a 8-bit binary image (0-255 exclusively)");
     	}
