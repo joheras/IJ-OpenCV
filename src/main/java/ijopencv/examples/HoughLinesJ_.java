@@ -26,9 +26,8 @@ import org.scijava.plugin.Plugin;
  */
 @Plugin(type = Command.class, headless = true, menuPath = "Plugins>IJ-OpenCV-plugins>Hough lines")
 public class HoughLinesJ_  implements Command {
-
-
-    @Parameter
+			
+    @Parameter (validater="checkType")
     private ImagePlus imp;
     
     @Parameter(label="Minimum line length (pixels)", min="1", stepSize="10")
@@ -46,28 +45,33 @@ public class HoughLinesJ_  implements Command {
     @Parameter(label="Step_angle iteration (degrees)", min="1", stepSize="5")
     private double step_theta=5;
     
+    /**
+     * Function associated to Imp input: check image type
+     * Hough line is defined for binary images
+     * @param Imp : input ImagePlus
+     */
+    protected void checkType() {
+    	ImageProcessor ImProc = imp.getProcessor();
+    	if ( !ImProc.isBinary() ) {
+    		IJ.error("Image must be a 8-bit binary image (0-255 exclusively)");
+    		throw new IllegalArgumentException("Image must be a 8-bit binary image (0-255 exclusively)");
+    	}
+    }
+    
     @Override
     public void run() {
-        
-    	ImageProcessor ImProc = imp.getProcessor();
-   
-    	if ( !ImProc.isBinary() ) { //Hough line is defined for binary images
-    		IJ.error("Image must be a 8-bit binary image (0-255 exclusively)");
-    	}
-    	
-    	else {	
-			// Do line detection
-			ArrayList<Line> linesIJ = HoughLines(imp, min_length, step_line, min_theta, max_theta, step_theta);
-			
-			// Add lines to RoiManager
-	        RoiManager rm = new RoiManager();
-	        rm.setVisible(true);
+ 
+		// Do line detection
+		ArrayList<Line> linesIJ = HoughLines(imp, min_length, step_line, min_theta, max_theta, step_theta);
+		
+		// Add lines to RoiManager
+        RoiManager rm = new RoiManager();
+        rm.setVisible(true);
 
-	        for (int i = 0; i < linesIJ.size(); i++) {
-	            rm.add(imp, linesIJ.get(i), i);
-		        }
-			}
-    	}
+        for (int i = 0; i < linesIJ.size(); i++) {
+            rm.add(imp, linesIJ.get(i), i);
+	        }
+		}
 		
 	/**
 	 * Hough lines detection: Perform line detection on a binary image
