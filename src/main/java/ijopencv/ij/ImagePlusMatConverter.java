@@ -84,6 +84,25 @@ public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
         }
         return mat;
     }
+    
+    
+    /**
+     * Convert the {@link ImageProcessor} to a given bitDepth and then
+     * to an OpenCV image of type {@link Mat}
+     *
+     * @param ip The {@link ImageProcessor} to be converted
+     * @param bitDepth Target bit depth
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(ImageProcessor ip, int bitDepth) {
+    	if      (bitDepth==8)   ip = ip.convertToByteProcessor();
+    	else if (bitDepth==16)  ip = ip.convertToShortProcessor();
+    	else if (bitDepth==32)  ip = ip.convertToFloatProcessor();
+    	else throw new IllegalArgumentException("bitDepth can only be 8, 16 or 32");
+    	Mat mat = toMat(ip);
+        return mat;
+    }
+    
 
     /**
      * Duplicates {@link ByteProcessor} to the corresponding OpenCV image of
@@ -154,5 +173,32 @@ public class ImagePlusMatConverter extends AbstractConverter< ImagePlus, Mat> {
         }
         return new Mat(h, w, opencv_core.CV_8UC3, new BytePointer(bData));
     }
+    
+    /**
+     * Convert an {@link ImagePlus} image to an OpenCV image of type {@link Mat}
+     *
+     * @param imp The {@link ImagePlus} to be converted
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(ImagePlus imp) {
+    	ImageProcessor ip = imp.getProcessor();
+    	Mat mat = toMat(ip);
+        return mat;
+    }
+    
+    /**
+     * Convert an {@link ImagePlus} image to a different bitDepth and then to an OpenCV image of type {@link Mat}
+     *
+     * @param imp The {@link ImagePlus} to be converted
+     * @param bitDepth The target bitDepth
+     * @return The OpenCV image (of type {@link Mat})
+     */
+    public static Mat toMat(ImagePlus imp, int bitDepth) {
+    	ImageProcessor ip = imp.getProcessor();
+    	Mat mat = toMat(ip, bitDepth);
+        return mat;
+    }
+    
+    
 
 }
