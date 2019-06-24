@@ -55,7 +55,12 @@ public class MatImagePlusConverter extends AbstractConverter< Mat, ImagePlus> {
     public Class< Mat> getInputType() {
         return Mat.class;
     }
-
+    
+    /**
+     * Convert from an OpenCV Matrix to the equivalent ImageProcessor
+     * @param mat the OpenCV matrix to convert
+     * @return result the ImageProcessor resulting from the conversion
+     */
     public static ImageProcessor toImageProcessor(Mat mat) {
         final int type = mat.type();
         ImageProcessor result = null;
@@ -73,6 +78,29 @@ public class MatImagePlusConverter extends AbstractConverter< Mat, ImagePlus> {
         }
         return result;
     }
+    
+    /**
+     * Convert from an OpenCV Matrix to the equivalent ImagePlus with default title Image
+     * @param mat the OpenCV matrix to convert
+     * @return result the ImagePlus resulting from the conversion
+     */
+    public static ImagePlus toImagePlus(Mat mat) {
+    	ImageProcessor ip = toImageProcessor(mat);
+        return new ImagePlus("Image", ip);
+        }
+    
+    /**
+     * Convert from an OpenCV Matrix to the equivalent ImagePlus with custom title
+     * @param mat the OpenCV matrix to convert
+     * @param title Title for the ImagePlus
+     * @return result the ImagePlus resulting from the conversion
+     */
+    public static ImagePlus toImagePlus(Mat mat, String title) {
+    	ImageProcessor ip = toImageProcessor(mat);
+        return new ImagePlus(title, ip);
+        }    
+    
+    
 
     // private methods ----------------------------------------------
     private static ByteProcessor makeByteProcessor(Mat mat) {
