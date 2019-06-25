@@ -46,7 +46,8 @@ You can download several images to test the plugins at the following [link](http
 IJ-OpenCV requires that ImageJ works with Java 8.
 
 ### Documentation
-Have a look at the [wiki](https://github.com/joheras/IJ-OpenCV/wiki) section for some help about how to use IJ-OpenCV in your own scripts.
+Have a look at the [wiki](https://github.com/joheras/IJ-OpenCV/wiki) section for some help about how to use IJ-OpenCV in your own scripts.  
+Or at the [API documentation](https://joheras.github.io/IJ-OpenCV/) for a full list of available classes.
 
 ### Source files
 The source files of the IJ-OpenCV library are available at the following [link](https://github.com/joheras/IJ-OpenCV).
