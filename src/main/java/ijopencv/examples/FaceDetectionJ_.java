@@ -46,7 +46,6 @@ public class FaceDetectionJ_ implements Command {
     public void run() {
         //Converters
         ImagePlusMatConverter ic = new ImagePlusMatConverter();
-        MatImagePlusConverter mip = new MatImagePlusConverter();
         RectRoiConverter rc = new RectRoiConverter();
         opencv_core.Mat img2 = ic.convert(imp, opencv_core.Mat.class);
 
@@ -66,7 +65,8 @@ public class FaceDetectionJ_ implements Command {
     public opencv_core.RectVector detectFaces(opencv_core.Mat image) {
         opencv_core.Mat img_gray = new opencv_core.Mat();
         cvtColor(image, img_gray, CV_BGR2GRAY);
-
+        
+        // Open xml classifier located in Fiji.app/lib (provided by IJ-OpenCV update site)
         opencv_objdetect.CascadeClassifier faceclassifier = new opencv_objdetect.CascadeClassifier(Paths.get(IJ.getDirectory("imagej"),"lib","haarcascade_frontalface_alt.xml").toString());
 
         opencv_core.RectVector rv = new opencv_core.RectVector();
