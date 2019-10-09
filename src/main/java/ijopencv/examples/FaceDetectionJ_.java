@@ -31,8 +31,6 @@ public class FaceDetectionJ_ implements Command {
     @Parameter
     private ImagePlus imp;
 
-    private Object opencv_objdetect;
-
     @Override
     public void run() {
         //Converters
@@ -63,7 +61,9 @@ public class FaceDetectionJ_ implements Command {
         opencv_core.RectVector rv = new opencv_core.RectVector();
 
         faceclassifier.detectMultiScale(img_gray, rv, 1.1, 2, CASCADE_SCALE_IMAGE, new opencv_core.Size(30, 30), new opencv_core.Size(500, 500));
-
+        
+        faceclassifier.close(); //prevent possible memory leak
+        
         return rv;
 
     }
