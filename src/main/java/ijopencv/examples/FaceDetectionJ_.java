@@ -34,9 +34,8 @@ public class FaceDetectionJ_ implements Command {
     @Override
     public void run() {
         //Converters
-        ImagePlusMatConverter ic = new ImagePlusMatConverter();
         RectRoiConverter rc = new RectRoiConverter();
-        opencv_core.Mat img2 = ic.convert(imp, opencv_core.Mat.class);
+        opencv_core.Mat img2 = ImagePlusMatConverter.toMat(imp, 8); // also does RGB to Gray automatically
 
         // Detect the faces and store them as an array of rectangles
         opencv_core.RectVector rv = detectFaces(img2);
@@ -48,19 +47,20 @@ public class FaceDetectionJ_ implements Command {
             Roi r = rc.convert(rv.get(i), Roi.class);
             rm.add(imp, r, 0);
         }
+        
+        //Show all ROI
+        rm.runCommand("Show All");
 
     }
 
     public opencv_core.RectVector detectFaces(opencv_core.Mat image) {
-        opencv_core.Mat img_gray = new opencv_core.Mat();
-        cvtColor(image, img_gray, CV_BGR2GRAY);
         
         // Open xml classifier located in Fiji.app/lib (provided by IJ-OpenCV update site)
         opencv_objdetect.CascadeClassifier faceclassifier = new opencv_objdetect.CascadeClassifier(Paths.get(IJ.getDirectory("imagej"),"lib","haarcascade_frontalface_alt.xml").toString());
 
         opencv_core.RectVector rv = new opencv_core.RectVector();
 
-        faceclassifier.detectMultiScale(img_gray, rv, 1.1, 2, CASCADE_SCALE_IMAGE, new opencv_core.Size(30, 30), new opencv_core.Size(500, 500));
+        faceclassifier.detectMultiScale(image, rv, 1.1, 2, CASCADE_SCALE_IMAGE, new opencv_core.Size(30, 30), new opencv_core.Size(500, 500));
         
         faceclassifier.close(); //prevent possible memory leak
         
