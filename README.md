@@ -47,7 +47,7 @@ IJ-OpenCV requires that ImageJ works with Java 8.
 
 ### Documentation
 Have a look at the [wiki](https://github.com/joheras/IJ-OpenCV/wiki) section for some help about how to use IJ-OpenCV in your own scripts.  
-Or at the [API documentation](https://joheras.github.io/IJ-OpenCV/) for a full list of available classes.
+Or at the [IJ-OpenCV API documentation](https://joheras.github.io/IJ-OpenCV/) and related [OpenCV API documentation](https://www.javadoc.io/doc/org.bytedeco.javacpp-presets/opencv/3.4.2-1.4.2/).
 
 ### Source files
 The source files of the IJ-OpenCV library are available at the following [link](https://github.com/joheras/IJ-OpenCV).
