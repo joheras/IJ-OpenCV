@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.scijava</groupId>
         <artifactId>pom-scijava</artifactId>
-        <version>26.0.0</version>
+        <version>29.0.0-beta-1</version>
         <relativePath />
     </parent>
 
@@ -117,19 +117,28 @@
             <groupId>net.imagej</groupId>
             <artifactId>imagej</artifactId>
         </dependency>
-        <!-- SciJava dependencies -->
+       
+       <!-- SciJava dependencies -->
         <dependency>
             <groupId>org.scijava</groupId>
             <artifactId>scijava-common</artifactId>
             <type>jar</type>
         </dependency>
-        <!-- JavaCV dependencies -->
+        
+        <!-- OpenCV platform (Windows, Linux, Android...) -->
         <dependency>
-            <groupId>org.bytedeco</groupId>
-            <artifactId>javacv-platform</artifactId>
-            <version>1.4.2</version>
+          <groupId>org.bytedeco.javacpp-presets</groupId>
+          <artifactId>opencv-platform</artifactId>
+          <version>3.4.2-1.4.2</version>
         </dependency>
-
+        
+        <!-- OpenCV (JavaCPP comes with it) -->
+        <dependency>
+          <groupId>org.bytedeco.javacpp-presets</groupId>
+          <artifactId>opencv</artifactId>
+          <version>3.4.2-1.4.2</version>
+        </dependency>
+        
     </dependencies>
 
     <repositories>
