@@ -34,6 +34,8 @@ You can download and install the IJ-OpenCV library using maven; namely, includin
       ...
       </dependencies>
 ```
+By default, this will download the OpenCV dependencies for all platforms (Windows, Linux, iOS, android...).  
+To only download the dependencies for a given platform, you can set the `javacpp.platform` property in Maven to `linux-x86_64`or `windows-x86_64` as indicated [here](https://github.com/bytedeco/javacpp-presets/wiki/Reducing-the-Number-of-Dependencies).
 
 #### - Manual installation (ex: ImageJ)
 The recommended installation procedure to include IJ-OpenCV in your project is the use of maven, but you can also directly download the IJ-OpenCV 1.0 binary archive [IJ-OpenCV-1.0.jar](http://search.maven.org/remotecontent?filepath=io/github/joheras/IJ-OpenCV/1.0/IJ-OpenCV-1.0.jar). You will also need to install the binary files of [JavaCV](https://github.com/bytedeco/javacv).  
