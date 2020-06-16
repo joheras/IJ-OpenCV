@@ -6,6 +6,10 @@ This new version of IJ-OpenCV has been built on top of SciJava Common using SciJ
 
 IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
+### Versions and dependencies
+IJ-OpenCV is currently relying on __OpenCV 3.4.2__ and __JavaCPP 1.4.2__.  
+All dependencies are installed when activating the IJ-OpenCV update site in Fiji.
+
 ### Citation
 If you use IJ-OpenCV for your research please cite :  
 * Domínguez, César, Jónathan Heras, and Vico Pascual. "IJ-OpenCV: Combining ImageJ and OpenCV for processing images in biomedicine." Computers in biology and medicine 84 (2017): 189-194.
