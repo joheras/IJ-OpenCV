@@ -6,6 +6,11 @@ This new version of IJ-OpenCV has been built on top of SciJava Common using SciJ
 
 IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
+### Notes
+OpenCV functions are by design optimised for the processing of 2D images, which are represented as 2D matrices (Mat object).  
+There is thus no multi-dimensional array contrary to e.g. numpy arrays in python.  
+3D volume can be analyzed slice-by-slice though.  
+
 ### Versions and dependencies
 IJ-OpenCV is currently relying on __OpenCV 3.4.2__ and __JavaCPP 1.4.2__.  
 All dependencies are installed when activating the IJ-OpenCV update site in Fiji.
