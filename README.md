@@ -1,6 +1,11 @@
-IJ-OpenCV is a Java library that allows the communication of ImageJ - a software for image analysis that is widely employed in life sciences - and OpenCV - a well-known computer vision library.
+IJ-OpenCV is a Java library that allows the communication of ImageJ - a software for image analysis that is widely employed in life sciences - and OpenCV - a well-known computer vision library.  
+To do so, IJ-OpenCV provide a set of converter functions between ImageJ1 object (like ImagePlus and ROI, also used in Fiji) to their OpenCV equivalent (Mat...) and vice-versa.  
 
-There are several benefits provided by the communication of ImageJ and OpenCV. From the ImageJ perspective, this tool is enhanced with several computer vision and machine learning algorithms, avoiding the re-implementation of methods and the connection with several external libraries. From the OpenCV point of view, this library is improved with a simple-to-use GUI and with the functionality to manage regions of interest.
+There are several benefits provided by the communication of ImageJ and OpenCV.   
+From the ImageJ perspective, this tool is enhanced with several computer vision and machine learning algorithms, avoiding the re-implementation of methods and the connection with several external libraries.  
+From the OpenCV point of view, this library is improved with a simple-to-use GUI and with the functionality to manage regions of interest.  
+
+Keep in mind that the conversion between OpenCV and ImageJ type can introduce slight delay in the execution, especially for large images, therefore you should avoid repetitive conversion back and forth between OpenCv and ImageJ type. You should rather perform all opencv operations successively and then convert back to the ImageJ type (if necessary).
 
 This new version of IJ-OpenCV has been built on top of SciJava Common using SciJava converters.
 
