@@ -13,7 +13,7 @@ IJ-OpenCV is free to use and licensed under the license GNU GPL 3.0.
 
 ### Notes
 OpenCV functions are by design optimised for the processing of 2D images, which are represented as 2D matrices (Mat object).  
-There is thus no multi-dimensional array contrary to e.g. numpy arrays in python.  
+Multi-channel matrices are possible (ex: RGB) however there is thus no multi-dimensional array contrary to e.g. numpy arrays in python.  
 3D volume can be analyzed slice-by-slice though.  
 
 ### Versions and dependencies
