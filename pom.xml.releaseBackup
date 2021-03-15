@@ -11,7 +11,7 @@
 
     <groupId>io.github.joheras</groupId>
     <artifactId>IJ-OpenCV</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.1-SNAPSHOT</version>
 
     <name>io.github.joheras:IJ-OpenCV</name>
     <description>A library that allows the connection of ImageJ and OpenCV.</description>
@@ -79,8 +79,7 @@
         <connection>scm:git:git@github.com:joheras/IJ-OpenCV.git</connection>
         <developerConnection>scm:git:git@github.com:joheras/IJ-OpenCV.git</developerConnection>
         <url>git@github.com:joheras/IJ-OpenCV.git</url>
-      <tag>IJ-OpenCV-1.2.1</tag>
-  </scm>
+    </scm>
     <issueManagement>
         <system>GitHub Issues</system>
         <url>https://github.com/joheras/IJ-OpenCV/issues</url>

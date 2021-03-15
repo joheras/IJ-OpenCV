@@ -76,7 +76,7 @@ public class HoughLinesJ_  implements Command {
     /**
      * Function associated to Imp input: check image type
      * Hough line is defined for binary images
-     * @param Imp : input ImagePlus
+     * param imp : input ImagePlus
      */
     protected void checkType() {
     	ImageProcessor ImProc = imp.getProcessor();
@@ -103,13 +103,13 @@ public class HoughLinesJ_  implements Command {
 		
 	/**
 	 * Hough lines detection: Perform line detection on a binary image
-	 * @param imp        : 8-bit Binary ImagePlus 
-	 * @param min_length : Minimum number of points lying on a line to return it
-	 * @param step_line  : Step size (pixels) between parallel lines for iterative line search
-	 * @param min_theta  : Start looking for lines with orientation corresponding to this Rho angle (degrees)
-	 * @param max_theta  : Stop looking for lines with orientation corresponding to this Rho angle (degrees)
-	 * @param step_theta : Angle step size for line search (degrees) 
-	 * @return
+	 * param imp        : 8-bit Binary ImagePlus 
+	 * param min_length : Minimum number of points lying on a line to return it
+	 * param step_line  : Step size (pixels) between parallel lines for iterative line search
+	 * param min_theta  : Start looking for lines with orientation corresponding to this Rho angle (degrees)
+	 * param max_theta  : Stop looking for lines with orientation corresponding to this Rho angle (degrees)
+	 * param step_theta : Angle step size for line search (degrees) 
+	 * return
 	 */
 	public ArrayList<Line> HoughLines(ImagePlus imp, int min_length, double step_line, double min_theta, double max_theta, double step_theta){
         
