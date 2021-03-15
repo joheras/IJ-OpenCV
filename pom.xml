@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.scijava</groupId>
         <artifactId>pom-scijava</artifactId>
-        <version>29.2.1</version>
+        <version>30.0.0</version>
         <relativePath />
     </parent>
 
     <groupId>io.github.joheras</groupId>
-    <artifactId>IJ-OpenCV</artifactId>
+    <artifactId>IJ-OpenCV-SNAPSHOT</artifactId>
     <version>1.2.1</version>
 
     <name>io.github.joheras:IJ-OpenCV</name>
