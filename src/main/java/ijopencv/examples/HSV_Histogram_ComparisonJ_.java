@@ -2,28 +2,21 @@
  * #%L
  * A library that allows the connection of ImageJ and OpenCV.
  * %%
- * Copyright (C) 2017 - 2021 University of La Rioja
+ * Copyright (C) 2017 - 2026 University of La Rioja
  * %%
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  * 
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
 package ijopencv.examples;
@@ -40,13 +33,14 @@ import java.util.ArrayList;
 import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.PointerPointer;
-import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_core.Mat;
-import org.bytedeco.javacpp.opencv_imgproc;
-import static org.bytedeco.javacpp.opencv_imgproc.calcHist;
+import org.bytedeco.opencv.global.opencv_core;
+import org.bytedeco.opencv.opencv_core.Mat;
+import org.bytedeco.opencv.global.opencv_imgproc;
+import static org.bytedeco.opencv.global.opencv_imgproc.calcHist;
 import org.scijava.command.Command;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
+import org.bytedeco.opencv.opencv_core.MatVector;
 
 
 /*
@@ -82,7 +76,7 @@ public class HSV_Histogram_ComparisonJ_  implements Command {
 
         // Converter
         ImagePlusMatVectorConverter isc = new ImagePlusMatVectorConverter();
-        opencv_core.MatVector mvec = isc.convert(imp,opencv_core.MatVector.class);
+        MatVector mvec = isc.convert(imp,MatVector.class);
 
         if (!showDialog()) {
             return;
@@ -90,14 +84,14 @@ public class HSV_Histogram_ComparisonJ_  implements Command {
 
         double[][] comparison = new double[4][stacksize * (stacksize - 1) / 2];
 
-        opencv_core.Mat mask = new opencv_core.Mat();
+        Mat mask = new Mat();
         IntPointer intPtrChannels = new IntPointer(0, 1, 2);
         IntPointer intPtrHistSize = new IntPointer(hueBins, saturationBins, valueBins);
         FloatPointer fltPtrRanges = new FloatPointer(0.0f, 179.0f, 0.0f, 255.0f, 0.0f, 255.0f);
         PointerPointer ptptranges = new PointerPointer(fltPtrRanges, fltPtrRanges, fltPtrRanges);
 
-        opencv_core.Mat hist1 = new opencv_core.Mat();
-        opencv_core.Mat hist2 = new opencv_core.Mat();
+        Mat hist1 = new Mat();
+        Mat hist2 = new Mat();
         int n = 0;
         
         Mat hsv = new Mat();

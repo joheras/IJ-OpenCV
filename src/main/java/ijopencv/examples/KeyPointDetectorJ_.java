@@ -2,28 +2,21 @@
  * #%L
  * A library that allows the connection of ImageJ and OpenCV.
  * %%
- * Copyright (C) 2017 - 2021 University of La Rioja
+ * Copyright (C) 2017 - 2026 University of La Rioja
  * %%
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  * 
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
 package ijopencv.examples;
@@ -43,15 +36,23 @@ import ijopencv.ij.ImagePlusMatConverter;
 import ijopencv.opencv.KeyPointVectorPointRoiConverter;
 import ijopencv.ij.PointRoiKeyPointVectorConverter;
 import java.util.Vector;
-import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_core.KeyPointVector;
-import org.bytedeco.javacpp.opencv_core.Mat;
-import org.bytedeco.javacpp.opencv_features2d;
-import org.bytedeco.javacpp.opencv_features2d.KAZE;
-import org.bytedeco.javacpp.opencv_xfeatures2d;
+import org.bytedeco.opencv.opencv_core.KeyPointVector;
+import org.bytedeco.opencv.opencv_core.Mat;
+import org.bytedeco.opencv.opencv_features2d.AKAZE;
+import org.bytedeco.opencv.opencv_features2d.BRISK;
+import org.bytedeco.opencv.opencv_features2d.KAZE;
+import org.bytedeco.opencv.opencv_features2d.MSER;
+import org.bytedeco.opencv.opencv_features2d.ORB;
+import org.bytedeco.opencv.opencv_features2d.SIFT;
+import org.bytedeco.opencv.opencv_xfeatures2d.SURF;
 import org.scijava.command.Command;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
+import org.bytedeco.opencv.opencv_features2d.AgastFeatureDetector;
+import org.bytedeco.opencv.opencv_features2d.FastFeatureDetector;
+import org.bytedeco.opencv.opencv_features2d.Feature2D;
+import org.bytedeco.opencv.opencv_features2d.GFTTDetector;
+import org.bytedeco.opencv.opencv_features2d.SimpleBlobDetector;
 
 /**
  *
@@ -85,42 +86,42 @@ public class KeyPointDetectorJ_ implements Command {
     }
 
     public PointRoi keyPointDetection(String method) {
-        opencv_features2d.Feature2D f2d = new opencv_features2d.Feature2D();
+        Feature2D f2d = new Feature2D();
 
         if (method == "SIFT") {
-            f2d = opencv_xfeatures2d.SIFT.create();
+            f2d = SIFT.create();
         }
         if (method == "SURF") {
-            f2d = opencv_xfeatures2d.SURF.create();
+            f2d = SURF.create();
         }
         if (method == "ORB") {
-            f2d = opencv_features2d.ORB.create();
+            f2d = ORB.create();
 
         }
         if (method == "BRISK") {
-            f2d = opencv_features2d.BRISK.create();
+            f2d = BRISK.create();
         }
         if (method == "MSER") {
-            f2d = opencv_features2d.MSER.create();
+            f2d = MSER.create();
         }
         if (method == "AKAZE") {
-            f2d = opencv_features2d.AKAZE.create();
+            f2d = AKAZE.create();
         }
         if (method == "SimpleBlob") {
-            f2d = opencv_features2d.SimpleBlobDetector.create();
+            f2d = SimpleBlobDetector.create();
         }
 
         if (method == "KAZE") {
             f2d = KAZE.create();
         }
         if (method == "AGAST") {
-            f2d = opencv_features2d.AgastFeatureDetector.create();
+            f2d = AgastFeatureDetector.create();
         }
         if (method == "FAST") {
-            f2d = opencv_features2d.FastFeatureDetector.create();
+            f2d = FastFeatureDetector.create();
         }
         if (method == "GFFT") {
-            f2d = opencv_features2d.GFTTDetector.create();
+            f2d = GFTTDetector.create();
         }
 
         // Converters
@@ -129,9 +130,9 @@ public class KeyPointDetectorJ_ implements Command {
         PointRoiKeyPointVectorConverter roi2kp = new PointRoiKeyPointVectorConverter();
         
         
-        opencv_core.Mat imageOpenCV = ic.convert(imp, Mat.class);
+        Mat imageOpenCV = ic.convert(imp, Mat.class);
 
-        KeyPointVector kpv = new opencv_core.KeyPointVector();
+        KeyPointVector kpv = new KeyPointVector();
 
         f2d.detect(imageOpenCV, kpv);
 

@@ -2,28 +2,21 @@
  * #%L
  * A library that allows the connection of ImageJ and OpenCV.
  * %%
- * Copyright (C) 2017 - 2021 University of La Rioja
+ * Copyright (C) 2017 - 2026 University of La Rioja
  * %%
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  * 
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
 package ijopencv.examples;
@@ -44,12 +37,14 @@ import ijopencv.opencv.Circle2fOvalRoiConverter;
 import ijopencv.utils.Circle2fCV;
 import org.bytedeco.javacpp.FloatPointer;
 
-import org.bytedeco.javacpp.opencv_core;
-import static org.bytedeco.javacpp.opencv_core.split;
-import org.bytedeco.javacpp.opencv_imgproc;
+import static org.bytedeco.opencv.global.opencv_core.split;
+import org.bytedeco.opencv.global.opencv_imgproc;
 import org.scijava.command.Command;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
+import org.bytedeco.opencv.opencv_core.Mat;
+import org.bytedeco.opencv.opencv_core.MatVector;
+import org.bytedeco.opencv.opencv_core.Point2f;
 
 /**
  *
@@ -72,22 +67,22 @@ public class DetectOxidationJ_ implements Command {
     public OvalRoi detectROI(ImagePlus imp){
         // Converter 
          ImagePlusMatConverter ic = new ImagePlusMatConverter();
-        opencv_core.Mat newImage = ic.convert(imp,opencv_core.Mat.class);
+        Mat newImage = ic.convert(imp,Mat.class);
         
         
-        opencv_core.Mat hsv = new opencv_core.Mat();
+        Mat hsv = new Mat();
         opencv_imgproc.cvtColor(newImage,hsv,opencv_imgproc.COLOR_BGR2HSV);
         
-        opencv_core.MatVector mv = new opencv_core.MatVector(3);
+        MatVector mv = new MatVector(3);
         split(hsv, mv);
         
-        opencv_core.Mat thres = new opencv_core.Mat();
+        Mat thres = new Mat();
         opencv_imgproc.threshold(mv.get(1), thres, 0, 255, opencv_imgproc.CV_THRESH_BINARY_INV + opencv_imgproc.CV_THRESH_OTSU);
         
-        opencv_core.MatVector contours = new opencv_core.MatVector();
+        MatVector contours = new MatVector();
         opencv_imgproc.findContours(thres,contours,opencv_imgproc.RETR_TREE,opencv_imgproc.CHAIN_APPROX_SIMPLE);
         
-        opencv_core.Point2f c = new opencv_core.Point2f();
+        Point2f c = new Point2f();
         FloatPointer r  = new FloatPointer();
         
         
